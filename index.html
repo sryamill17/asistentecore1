@@ -155,64 +155,58 @@
         
         <!-- Contenedores de cada Pregunta -->
         <div class="question-container">
-            <button class="question-button" onclick="toggleQuestion(1)">Pregunta 1</button>
-            <div id="question1" class="question-content">¿Por qué es importante revisar la configuración de privacidad en redes sociales y cómo afecta esto a la seguridad del usuario?</div>
+            <button class="question-button" onclick="showQuestion(1)">Pregunta 1</button>
+            <div id="question1" class="question-content">
+                <strong>Pregunta:</strong> ¿Por qué es importante revisar la configuración de privacidad en redes sociales y cómo afecta esto a la seguridad del usuario?
+            </div>
         </div>
         <div class="question-container">
-            <button class="question-button" onclick="toggleQuestion(2)">Pregunta 2</button>
-            <div id="question2" class="question-content">¿Cuáles son las posibles consecuencias de publicar información falsa o dañina en redes sociales?</div>
+            <button class="question-button" onclick="showQuestion(2)">Pregunta 2</button>
+            <div id="question2" class="question-content">
+                <strong>Pregunta:</strong> ¿Cuáles son las posibles consecuencias de publicar información falsa o dañina en redes sociales?
+            </div>
         </div>
         <div class="question-container">
-            <button class="question-button" onclick="toggleQuestion(3)">Pregunta 3</button>
-            <div id="question3" class="question-content">Qué riesgos existen al agregar personas desconocidas a nuestras redes sociales y cómo prevenirlos?</div>
+            <button class="question-button" onclick="showQuestion(3)">Pregunta 3</button>
+            <div id="question3" class="question-content">
+                <strong>Pregunta:</strong> ¿Qué riesgos existen al agregar personas desconocidas a nuestras redes sociales y cómo prevenirlos?
+            </div>
         </div>
         <div class="question-container">
-            <button class="question-button" onclick="toggleQuestion(4)">Pregunta 4</button>
-            <div id="question4" class="question-content">Cómo influye el uso excesivo de redes sociales en la vida de los jóvenes y cuál es la recomendación para un uso saludable?</div>
+            <button class="question-button" onclick="showQuestion(4)">Pregunta 4</button>
+            <div id="question4" class="question-content">
+                <strong>Pregunta:</strong> ¿Cómo influye el uso excesivo de redes sociales en la vida de los jóvenes y cuál es la recomendación para un uso saludable?
+            </div>
         </div>
         <div class="question-container">
-            <button class="question-button" onclick="toggleQuestion(5)">Pregunta 5</button>
-            <div id="question5" class="question-content">Cuáles son algunos de los riesgos que enfrentan niñas, niños y adolescentes en el entorno digital?</div>
+            <button class="question-button" onclick="showQuestion(5)">Pregunta 5</button>
+            <div id="question5" class="question-content">
+                <strong>Pregunta:</strong> ¿Cuáles son algunos de los riesgos que enfrentan niñas, niños y adolescentes en el entorno digital?
+            </div>
         </div>
     </div>
 
     <script>
-        // Función para mostrar u ocultar el contenido de la pregunta seleccionada
-        function toggleQuestion(questionNumber) {
+        // Función para mostrar el contenido de la pregunta y desplazarse hacia él
+        function showQuestion(questionNumber) {
+            // Selecciona el contenido de la pregunta
             const questionContent = document.getElementById(`question${questionNumber}`);
             
-            // Verifica si la pregunta está visible o no
-            if (questionContent.style.display === "none" || questionContent.style.display === "") {
-                questionContent.style.display = "block";
-            } else {
-                questionContent.style.display = "none";
-            }
-        }
-    </script>
-    <script>
-        function showQuestions(section) {
-            document.getElementById('mainSection').style.display = 'none';
-            document.getElementById('questionsSection').style.display = 'block';
-            document.getElementById('sectionTitle').textContent = section;
-        }
-
-        function showMain() {
-            document.getElementById('mainSection').style.display = 'block';
-            document.getElementById('questionsSection').style.display = 'none';
-        }
-
-        function search() {
-            const searchText = document.getElementById('searchInput').value.toLowerCase();
-            const buttons = document.getElementsByClassName('button');
+            // Asegura que el contenido esté visible
+            questionContent.style.display = 'block';
             
-            for (let button of buttons) {
-                const buttonText = button.textContent.toLowerCase();
-                if (buttonText.includes(searchText)) {
-                    button.style.display = 'block';
-                } else {
-                    button.style.display = 'none';
-                }
-            }
+            // Desplaza la vista hacia el contenido de la pregunta
+            questionContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Función para regresar a la vista principal
+        function showMain() {
+            // Oculta todas las respuestas cuando regresas a la vista principal
+            const allQuestions = document.querySelectorAll('.question-content');
+            allQuestions.forEach(question => question.style.display = 'none');
+            
+            // Opcional: desplazarse al inicio de la sección de preguntas
+            document.getElementById('questionsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     </script>
 </body>
