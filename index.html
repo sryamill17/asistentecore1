@@ -136,18 +136,36 @@
 
         <!-- Sección de Preguntas -->
         <div id="questionsSection" class="questions-section">
-            <button class="back-button" onclick="showMain()">← Volver</button>
-            <h2 id="sectionTitle"></h2>
-            <div id="questionButtons">
-                <button class="question-button">Pregunta 1</button>
-                <button class="question-button">Pregunta 2</button>
-                <button class="question-button">Pregunta 3</button>
-                <button class="question-button">Pregunta 4</button>
-                <button class="question-button">Pregunta 5</button>
-            </div>
+        <button class="back-button" onclick="showMain()">← Volver</button>
+        <h2 id="sectionTitle">Preguntas</h2>
+        <div id="questionButtons">
+            <button class="question-button" onclick="toggleQuestion(1)">Pregunta 1</button>
+            <button class="question-button" onclick="toggleQuestion(2)">Pregunta 2</button>
+            <button class="question-button" onclick="toggleQuestion(3)">Pregunta 3</button>
+            <button class="question-button" onclick="toggleQuestion(4)">Pregunta 4</button>
+            <button class="question-button" onclick="toggleQuestion(5)">Pregunta 5</button>
         </div>
+        <!-- Contenidos de las Preguntas -->
+        <div id="question1" class="question-content">Contenido de la Pregunta 1</div>
+        <div id="question2" class="question-content">Contenido de la Pregunta 2</div>
+        <div id="question3" class="question-content">Contenido de la Pregunta 3</div>
+        <div id="question4" class="question-content">Contenido de la Pregunta 4</div>
+        <div id="question5" class="question-content">Contenido de la Pregunta 5</div>
     </div>
 
+    <script>
+        // Función para mostrar u ocultar la pregunta seleccionada
+        function toggleQuestion(questionNumber) {
+            const questionContent = document.getElementById(`question${questionNumber}`);
+            
+            // Verifica si la pregunta está visible o no
+            if (questionContent.style.display === "none" || questionContent.style.display === "") {
+                questionContent.style.display = "block";
+            } else {
+                questionContent.style.display = "none";
+            }
+        }
+    </script>
     <script>
         function showQuestions(section) {
             document.getElementById('mainSection').style.display = 'none';
