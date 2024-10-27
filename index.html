@@ -26,13 +26,13 @@
             margin-bottom: 30px;
             font-size: 2em;
         }
-        .buttons, .questions {
+        .buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             margin: 20px 0;
         }
-        .button, .question-button {
+        .button {
             background-color: #ecf0f1;
             color: #34495e;
             padding: 15px;
@@ -46,7 +46,7 @@
             font-weight: bold;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
-        .button:hover, .question-button:hover {
+        .button:hover {
             background-color: #dcdde1;
             transform: translateY(-2px);
         }
@@ -78,38 +78,23 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
-        .questions {
-            display: none; /* Ocultamos las preguntas inicialmente */
-            flex-direction: column;
-            align-items: center;
-        }
     </style>
-    <script>
-        function showQuestions() {
-            // Ocultar los botones principales
-            document.querySelector('.buttons').style.display = 'none';
-            // Mostrar los botones de preguntas
-            document.getElementById('questions').style.display = 'flex';
-        }
-
-        function showQuestion(number) {
-            alert(`Has seleccionado la ${number}`);
-        }
-
-        function goBack() {
-            // Mostrar los botones principales
-            document.querySelector('.buttons').style.display = 'flex';
-            // Ocultar los botones de preguntas
-            document.getElementById('questions').style.display = 'none';
-        }
-    </script>
 </head>
 <body>
     <div class="container">
         <h1>Asistente Personal Core 1</h1>
         <div class="buttons">
-            <div class="button" onclick="showQuestions()">📱 Redes Sociales<br><small>Conéctate con amigos y familia</small></div>
-            <div class="button" onclick="showQuestions()">👨‍👩‍👧 Familia<br><small>Fortalece los lazos familiares</small></div>
-            <div class="button" onclick="showQuestions()">🧠 Personalidad<br><small>Descubre tu verdadero yo</small></div>
-            <div class="button" onclick="showQuestions()">💪 Autoestima<br><small>Construye tu confianza</small></div>
-            <div
+            <div class="button">📱 Redes Sociales<br><small>Conéctate con responsabilidad</small></div>
+            <div class="button">👨‍👩‍👧 Familia<br><small>Fortalece los lazos familiares</small></div>
+            <div class="button">🧠 Personalidad<br><small>Descubre tu verdadero yo</small></div>
+            <div class="button">💪 Autoestima<br><small>Construye tu confianza</small></div>
+            <div class="button">🤝 Amistades<br><small>Haz y mantén amistades</small></div>
+            <div class="button">🆔 Identidad y Libertad<br><small>Explora quién eres</small></div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Seleccione un tema">
+            <button><span>&#128269;</span></button>
+        </div>
+    </div>
+</body>
+</html>
