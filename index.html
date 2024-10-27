@@ -138,11 +138,12 @@
         <div id="questionsSection" class="questions-section">
             <button class="back-button" onclick="showMain()">← Volver</button>
             <h2 id="sectionTitle"></h2>
-            <div id="questionButtons">
-                <!-- Botones de preguntas que se generarán dinámicamente -->
-            </div>
-            <div id="answerSection">
-                <!-- Aquí se mostrará la respuesta de la pregunta seleccionada -->
+            <div id="questionButtons"></div>
+            <div class="answer-section" id="answerSection">
+                <p id="questionText"></p>
+                <input type="text" id="responseInput" class="response-input" placeholder="Escribe tu respuesta aquí...">
+                <button class="check-button" onclick="checkAnswer()">Verificar Respuesta</button>
+                <p id="correctAnswer" class="correct-answer" style="display:none;"></p>
             </div>
         </div>
     </div>
@@ -166,60 +167,80 @@
             ],
             "Personalidad": [
                 { question: "¿Qué es la personalidad?", answer: "La personalidad es el conjunto de características y patrones de comportamiento que definen a una persona." },
-                { question: "¿Se puede cambiar la personalidad?", answer: "Sí, es posible adaptarse y modificar ciertos rasgos a lo largo de la vida." },
-                { question: "¿Por qué es importante conocer tu personalidad?", answer: "Ayuda a tomar mejores decisiones y a entender nuestras fortalezas y debilidades." },
-                { question: "¿Cuál es el impacto de la personalidad en las relaciones?", answer: "La personalidad influye en cómo nos relacionamos y comprendemos a los demás." },
-                { question: "¿Cómo descubrir tu tipo de personalidad?", answer: "Puedes usar tests de personalidad o analizar tus comportamientos y preferencias." }
+                { question: "¿Se puede cambiar la personalidad?", answer: "Sí, a lo largo de la vida, con esfuerzo y autoconocimiento." },
+                { question: "¿Cómo influye la personalidad en nuestras relaciones?", answer: "Determina cómo interactuamos y nos relacionamos con los demás." },
+                { question: "¿Qué tipos de personalidad existen?", answer: "Existen muchos modelos, como los 16 tipos de Myers-Briggs." },
+                { question: "¿Cómo entender mi propia personalidad?", answer: "Reflexiona sobre tus emociones, reacciones y comportamientos." }
             ],
             "Autoestima": [
-                { question: "¿Qué es la autoestima?", answer: "Es la percepción y valoración que tienes de ti mismo." },
-                { question: "¿Cómo mejorar la autoestima?", answer: "Reconoce tus logros, acepta tus errores y evita compararte con los demás." },
-                { question: "¿Por qué es importante la autoestima?", answer: "La autoestima influye en tu bienestar emocional y en tus relaciones." },
-                { question: "¿Cómo evitar una baja autoestima?", answer: "Rodéate de personas positivas y evita críticas destructivas hacia ti mismo." },
-                { question: "¿Qué efectos tiene la baja autoestima?", answer: "Puede llevar a inseguridades, ansiedad y dificultad en las relaciones." }
+                { question: "¿Qué es la autoestima?", answer: "Es la percepción y valoración que tenemos de nosotros mismos." },
+                { question: "¿Por qué es importante tener una buena autoestima?", answer: "Ayuda a tener confianza y a enfrentar retos." },
+                { question: "¿Cómo mejorar la autoestima?", answer: "Reconoce tus logros, establece metas realistas y cuida tu diálogo interno." },
+                { question: "¿Qué factores afectan la autoestima?", answer: "Las experiencias, las relaciones y la autocrítica." },
+                { question: "¿Cómo afecta la autoestima en las decisiones?", answer: "Una baja autoestima puede llevar a decisiones impulsivas o inseguras." }
             ],
             "Amistades": [
-                { question: "¿Por qué son importantes las amistades?", answer: "Las amistades brindan apoyo, compañía y ayudan a fortalecer el bienestar emocional." },
-                { question: "¿Cómo hacer nuevos amigos?", answer: "Participa en actividades sociales, muestra interés en los demás y sé abierto." },
-                { question: "¿Cómo mantener una amistad?", answer: "Comunícate regularmente, sé honesto y apoya a tus amigos en sus necesidades." },
-                { question: "¿Qué hacer si una amistad es tóxica?", answer: "Establece límites y evalúa si es mejor alejarte de esa persona." },
-                { question: "¿Cómo manejar conflictos en una amistad?", answer: "Habla de forma abierta y escucha las preocupaciones de tu amigo." }
+                { question: "¿Cómo hacer nuevos amigos?", answer: "Únete a actividades que te interesen y sé abierto/a a conocer gente." },
+                { question: "¿Qué es una amistad saludable?", answer: "Una amistad basada en la confianza, el respeto y el apoyo mutuo." },
+                { question: "¿Cómo resolver conflictos con amigos?", answer: "Habla sinceramente y busca una solución que beneficie a ambos." },
+                { question: "¿Cómo mantener una amistad a distancia?", answer: "Comunícate regularmente y planifica visitas si es posible." },
+                { question: "¿Qué hacer si un amigo te traiciona?", answer: "Comunica tus sentimientos y decide si es posible seguir adelante." }
             ],
-            "Identidad y Libertad": [
-                { question: "¿Qué es la identidad?", answer: "Es el conjunto de características y valores que definen quién eres como persona." },
-                { question: "¿Por qué es importante la libertad personal?", answer: "La libertad permite tomar decisiones propias y desarrollar autonomía." },
-                { question: "¿Cómo descubrir tu identidad?", answer: "Explora tus intereses, valores y reflexiona sobre lo que te hace único." },
-                { question: "¿Cuál es la relación entre identidad y sociedad?", answer: "La sociedad influye en la identidad, pero es importante mantener la autenticidad." },
-                { question: "¿Cómo expresar tu identidad de manera saludable?", answer: "Sé auténtico, respeta tus valores y no temas mostrar tus verdaderos intereses." }
+            "Identidad": [
+                { question: "¿Qué es la identidad?", answer: "Es el conjunto de características que definen a una persona." },
+                { question: "¿Cómo influye la cultura en la identidad?", answer: "La cultura moldea nuestras creencias, valores y comportamientos." },
+                { question: "¿Por qué es importante conocer tu identidad?", answer: "Te ayuda a comprender quién eres y cómo te relacionas con el mundo." },
+                { question: "¿Qué factores afectan la identidad?", answer: "La familia, la cultura, las experiencias y las relaciones." },
+                { question: "¿Cómo evolucionará tu identidad?", answer: "A medida que creces y enfrentas nuevas experiencias." }
             ]
         };
+
+        let currentQuestions = [];
+        let currentIndex = 0;
 
         function showQuestions(section) {
             document.getElementById('mainSection').style.display = 'none';
             document.getElementById('questionsSection').style.display = 'block';
             document.getElementById('sectionTitle').textContent = section;
 
-            // Limpiar botones de preguntas anteriores
-            const questionButtons = document.getElementById('questionButtons');
-            questionButtons.innerHTML = '';
-
-            // Crear botones de preguntas para la sección actual
-            sections[section].forEach((item, index) => {
-                const button = document.createElement('button');
-                button.className = 'question-button';
-                button.textContent = item.question;
-                button.onclick = () => showAnswer(section, index);
-                questionButtons.appendChild(button);
-            });
-
-            // Limpiar la sección de respuesta
-            document.getElementById('answerSection').innerHTML = '';
+            currentQuestions = sections[section];
+            currentIndex = 0;
+            displayQuestion(currentIndex);
         }
 
-        function showAnswer(section, questionIndex) {
+        function displayQuestion(index) {
+            const questionText = document.getElementById('questionText');
+            const responseInput = document.getElementById('responseInput');
+            const correctAnswer = document.getElementById('correctAnswer');
             const answerSection = document.getElementById('answerSection');
-            answerSection.innerHTML = `<p><strong>Respuesta:</strong> ${sections[section][questionIndex].answer}</p>`;
+
+            questionText.textContent = currentQuestions[index].question;
+            responseInput.value = '';
+            correctAnswer.style.display = 'none';
+            answerSection.style.display = 'block';
         }
+
+        function checkAnswer() {
+            const responseInput = document.getElementById('responseInput');
+            const correctAnswer = document.getElementById('correctAnswer');
+            const currentQuestion = currentQuestions[currentIndex];
+
+            if (responseInput.value.trim().toLowerCase() === currentQuestion.answer.toLowerCase()) {
+                correctAnswer.textContent = "¡Correcto!";
+            } else {
+                correctAnswer.textContent = "Incorrecto. La respuesta correcta es: " + currentQuestion.answer;
+            }
+            correctAnswer.style.display = 'block';
+        }
+
+        // Se maneja el clic en las preguntas para avanzar
+        document.getElementById('questionButtons').addEventListener('click', function(event) {
+            if (event.target.classList.contains('question-button')) {
+                const index = Array.from(document.getElementsByClassName('question-button')).indexOf(event.target);
+                currentIndex = index;
+                displayQuestion(currentIndex);
+            }
+        });
 
         function showMain() {
             document.getElementById('mainSection').style.display = 'block';
@@ -229,7 +250,7 @@
         function search() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
             const buttons = document.getElementsByClassName('button');
-            
+
             for (let button of buttons) {
                 const buttonText = button.textContent.toLowerCase();
                 if (buttonText.includes(searchText)) {
@@ -239,7 +260,15 @@
                 }
             }
         }
+
+        // Inicializa los botones de preguntas
+        const questionButtonsContainer = document.getElementById('questionButtons');
+        for (let i = 1; i <= 5; i++) {
+            const button = document.createElement('button');
+            button.className = 'question-button';
+            button.textContent = 'Pregunta ' + i;
+            questionButtonsContainer.appendChild(button);
+        }
     </script>
 </body>
 </html>
-
