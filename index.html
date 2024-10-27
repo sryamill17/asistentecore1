@@ -82,7 +82,6 @@
             transform: translateY(-2px);
         }
         
-        /* Estilos para la sección de preguntas */
         .questions-section {
             display: none;
         }
@@ -98,7 +97,7 @@
         }
         
         .question-button {
-            background-color: #4CAF50;
+            background-color: #a6f7df;
             color: white;
             padding: 15px;
             margin: 10px 0;
@@ -111,12 +110,17 @@
         }
         
         .question-button:hover {
-            background-color: #45a049;
+            background-color: #a6f7df;
+        }
+        
+        .answer-section {
+            margin-top: 20px;
+            display: none;
         }
     </style>
 </head>
 <body>
-     <div class="container">
+    <div class="container">
         <!-- Sección Principal -->
         <div id="mainSection">
             <h1>Asistente Personal Core 1</h1>
@@ -134,113 +138,102 @@
             </div>
         </div>
 
-      <!-- Sección de Preguntas -->
+        <!-- Sección de Preguntas -->
         <div id="questionsSection" class="questions-section">
             <button class="back-button" onclick="showMain()">← Volver</button>
             <h2 id="sectionTitle"></h2>
             <div id="questionButtons"></div>
             <div class="answer-section" id="answerSection">
-                <p id="questionText"></p>
-                <input type="text" id="responseInput" class="response-input" placeholder="Escribe tu respuesta aquí...">
-                <button class="check-button" onclick="checkAnswer()">Verificar Respuesta</button>
-                <p id="correctAnswer" class="correct-answer" style="display:none;"></p>
+                <h3 id="currentQuestion"></h3>
+                <input type="text" id="userAnswer" placeholder="Escribe tu respuesta aquí" />
+                <button onclick="checkAnswer()">Verificar Respuesta</button>
+                <p id="resultMessage"></p>
             </div>
         </div>
     </div>
 
     <script>
-        // Preguntas y respuestas para cada sección
-        const sections = {
-            "Redes Sociales": [
-                { question: "¿Por qué es importante la privacidad?", answer: "La privacidad es importante para proteger tu información personal." },
-                { question: "¿Cómo evitar el ciberacoso?", answer: "Reporta y bloquea cuentas ofensivas, y ajusta tus configuraciones de privacidad." },
-                { question: "¿Qué hacer si te hackean?", answer: "Cambia tu contraseña de inmediato y revisa configuraciones de seguridad." },
-                { question: "¿Cuánto tiempo es saludable pasar en redes sociales?", answer: "No más de 2 horas al día para un equilibrio saludable." },
-                { question: "¿Cómo identificar noticias falsas?", answer: "Verifica la fuente y busca información en medios confiables." }
+        const questionsData = {
+            'Redes Sociales': [
+                { question: '¿Cuál es el principal objetivo de las redes sociales?', answer: 'Conectar personas' },
+                { question: 'Menciona un riesgo de las redes sociales.', answer: 'Ciberacoso' },
+                { question: '¿Qué es un perfil privado?', answer: 'Un perfil que limita el acceso a información' },
+                { question: '¿Por qué es importante la privacidad en redes sociales?', answer: 'Para proteger información personal' },
+                { question: '¿Cómo se puede reportar contenido inapropiado?', answer: 'Usando la opción de reportar en la plataforma' }
             ],
-            "Familia": [
-                { question: "¿Cómo mejorar la comunicación familiar?", answer: "Escucha activamente y expresa tus pensamientos con respeto." },
-                { question: "¿Qué hacer en momentos de conflicto?", answer: "Mantén la calma, respeta el espacio de los demás y conversa luego." },
-                { question: "¿Cómo organizar actividades familiares?", answer: "Planifica con anticipación y considera los intereses de todos." },
-                { question: "¿Por qué es importante pasar tiempo en familia?", answer: "Fortalece los lazos afectivos y mejora la comprensión mutua." },
-                { question: "¿Cómo apoyar a un miembro de la familia?", answer: "Escúchalo, ofrécele ayuda y dale espacio si lo necesita." }
+            'Familia': [
+                { question: '¿Qué significa la comunicación familiar?', answer: 'Interacción entre miembros de la familia' },
+                { question: 'Menciona una forma de fortalecer la relación familiar.', answer: 'Pasar tiempo juntos' },
+                { question: '¿Qué es el apoyo emocional?', answer: 'Brindar comprensión y aliento' },
+                { question: '¿Por qué son importantes las tradiciones familiares?', answer: 'Fomentan la unión y la identidad' },
+                { question: '¿Qué rol juega el respeto en la familia?', answer: 'Fundamental para la armonía' }
             ],
-            "Personalidad": [
-                { question: "¿Qué es la personalidad?", answer: "La personalidad es el conjunto de características y patrones de comportamiento que definen a una persona." },
-                { question: "¿Se puede cambiar la personalidad?", answer: "Sí, a lo largo de la vida, con esfuerzo y autoconocimiento." },
-                { question: "¿Cómo influye la personalidad en nuestras relaciones?", answer: "Determina cómo interactuamos y nos relacionamos con los demás." },
-                { question: "¿Qué tipos de personalidad existen?", answer: "Existen muchos modelos, como los 16 tipos de Myers-Briggs." },
-                { question: "¿Cómo entender mi propia personalidad?", answer: "Reflexiona sobre tus emociones, reacciones y comportamientos." }
+            'Personalidad': [
+                { question: '¿Qué es la personalidad?', answer: 'Conjunto de características psicológicas' },
+                { question: 'Menciona un rasgo de personalidad.', answer: 'Extroversión' },
+                { question: '¿Cómo influye la personalidad en el comportamiento?', answer: 'Dirige las acciones y reacciones' },
+                { question: '¿Qué es la autoestima?', answer: 'Valoración que uno tiene de sí mismo' },
+                { question: '¿Cómo se puede mejorar la autoestima?', answer: 'A través de afirmaciones positivas' }
             ],
-            "Autoestima": [
-                { question: "¿Qué es la autoestima?", answer: "Es la percepción y valoración que tenemos de nosotros mismos." },
-                { question: "¿Por qué es importante tener una buena autoestima?", answer: "Ayuda a tener confianza y a enfrentar retos." },
-                { question: "¿Cómo mejorar la autoestima?", answer: "Reconoce tus logros, establece metas realistas y cuida tu diálogo interno." },
-                { question: "¿Qué factores afectan la autoestima?", answer: "Las experiencias, las relaciones y la autocrítica." },
-                { question: "¿Cómo afecta la autoestima en las decisiones?", answer: "Una baja autoestima puede llevar a decisiones impulsivas o inseguras." }
+            'Autoestima': [
+                { question: '¿Qué es la autoestima?', answer: 'Valoración personal' },
+                { question: '¿Por qué es importante la autoestima?', answer: 'Influye en el bienestar emocional' },
+                { question: '¿Cómo se puede fomentar la autoestima?', answer: 'Reconociendo logros' },
+                { question: '¿Qué papel juega la autoaceptación?', answer: 'Es esencial para la autoestima saludable' },
+                { question: '¿Cómo afecta la crítica a la autoestima?', answer: 'Puede disminuirla' }
             ],
-            "Amistades": [
-                { question: "¿Cómo hacer nuevos amigos?", answer: "Únete a actividades que te interesen y sé abierto/a a conocer gente." },
-                { question: "¿Qué es una amistad saludable?", answer: "Una amistad basada en la confianza, el respeto y el apoyo mutuo." },
-                { question: "¿Cómo resolver conflictos con amigos?", answer: "Habla sinceramente y busca una solución que beneficie a ambos." },
-                { question: "¿Cómo mantener una amistad a distancia?", answer: "Comunícate regularmente y planifica visitas si es posible." },
-                { question: "¿Qué hacer si un amigo te traiciona?", answer: "Comunica tus sentimientos y decide si es posible seguir adelante." }
+            'Amistades': [
+                { question: '¿Qué hace una buena amistad?', answer: 'Confianza y apoyo mutuo' },
+                { question: '¿Por qué es importante la amistad?', answer: 'Brinda apoyo emocional' },
+                { question: '¿Cómo se puede fortalecer una amistad?', answer: 'Comunicándose abiertamente' },
+                { question: 'Menciona un signo de una mala amistad.', answer: 'Deshonestidad' },
+                { question: '¿Qué es la lealtad en la amistad?', answer: 'Apoyo constante' }
             ],
-            "Identidad": [
-                { question: "¿Qué es la identidad?", answer: "Es el conjunto de características que definen a una persona." },
-                { question: "¿Cómo influye la cultura en la identidad?", answer: "La cultura moldea nuestras creencias, valores y comportamientos." },
-                { question: "¿Por qué es importante conocer tu identidad?", answer: "Te ayuda a comprender quién eres y cómo te relacionas con el mundo." },
-                { question: "¿Qué factores afectan la identidad?", answer: "La familia, la cultura, las experiencias y las relaciones." },
-                { question: "¿Cómo evolucionará tu identidad?", answer: "A medida que creces y enfrentas nuevas experiencias." }
+            'Identidad': [
+                { question: '¿Qué es la identidad personal?', answer: 'Conjunto de características que nos definen' },
+                { question: '¿Por qué es importante conocer nuestra identidad?', answer: 'Para comprendernos mejor a nosotros mismos' },
+                { question: '¿Qué factores influyen en la identidad?', answer: 'Cultura, experiencias, y relaciones' },
+                { question: '¿Cómo se relaciona la identidad con la autoestima?', answer: 'Una identidad clara puede mejorar la autoestima' },
+                { question: '¿Qué es la identidad social?', answer: 'Parte de nuestra identidad relacionada con grupos sociales' }
             ]
         };
-
-        let currentQuestions = [];
-        let currentIndex = 0;
 
         function showQuestions(section) {
             document.getElementById('mainSection').style.display = 'none';
             document.getElementById('questionsSection').style.display = 'block';
             document.getElementById('sectionTitle').textContent = section;
-
-            currentQuestions = sections[section];
-            currentIndex = 0;
-            displayQuestion(currentIndex);
+            const questionButtons = document.getElementById('questionButtons');
+            questionButtons.innerHTML = ''; // Limpiar preguntas anteriores
+            questionsData[section].forEach((q, index) => {
+                const button = document.createElement('button');
+                button.className = 'question-button';
+                button.textContent = `Pregunta ${index + 1}`;
+                button.onclick = () => showAnswer(q.question, q.answer);
+                questionButtons.appendChild(button);
+            });
         }
 
-        function displayQuestion(index) {
-            const questionText = document.getElementById('questionText');
-            const responseInput = document.getElementById('responseInput');
-            const correctAnswer = document.getElementById('correctAnswer');
-            const answerSection = document.getElementById('answerSection');
-
-            questionText.textContent = currentQuestions[index].question;
-            responseInput.value = '';
-            correctAnswer.style.display = 'none';
-            answerSection.style.display = 'block';
+        function showAnswer(question, answer) {
+            document.getElementById('currentQuestion').textContent = question;
+            document.getElementById('answerSection').style.display = 'block';
+            document.getElementById('userAnswer').value = '';
+            document.getElementById('resultMessage').textContent = '';
+            // Guardar la respuesta correcta para la verificación
+            document.getElementById('userAnswer').dataset.correctAnswer = answer;
         }
 
         function checkAnswer() {
-            const responseInput = document.getElementById('responseInput');
-            const correctAnswer = document.getElementById('correctAnswer');
-            const currentQuestion = currentQuestions[currentIndex];
-
-            if (responseInput.value.trim().toLowerCase() === currentQuestion.answer.toLowerCase()) {
-                correctAnswer.textContent = "¡Correcto!";
+            const userAnswer = document.getElementById('userAnswer').value.trim();
+            const correctAnswer = document.getElementById('userAnswer').dataset.correctAnswer;
+            const resultMessage = document.getElementById('resultMessage');
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                resultMessage.textContent = '¡Correcto!';
+                resultMessage.style.color = 'green';
             } else {
-                correctAnswer.textContent = "Incorrecto. La respuesta correcta es: " + currentQuestion.answer;
+                resultMessage.textContent = `Incorrecto. La respuesta correcta es: ${correctAnswer}`;
+                resultMessage.style.color = 'red';
             }
-            correctAnswer.style.display = 'block';
         }
-
-        // Se maneja el clic en las preguntas para avanzar
-        document.getElementById('questionButtons').addEventListener('click', function(event) {
-            if (event.target.classList.contains('question-button')) {
-                const index = Array.from(document.getElementsByClassName('question-button')).indexOf(event.target);
-                currentIndex = index;
-                displayQuestion(currentIndex);
-            }
-        });
 
         function showMain() {
             document.getElementById('mainSection').style.display = 'block';
@@ -250,7 +243,7 @@
         function search() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
             const buttons = document.getElementsByClassName('button');
-
+            
             for (let button of buttons) {
                 const buttonText = button.textContent.toLowerCase();
                 if (buttonText.includes(searchText)) {
@@ -259,15 +252,6 @@
                     button.style.display = 'none';
                 }
             }
-        }
-
-        // Inicializa los botones de preguntas
-        const questionButtonsContainer = document.getElementById('questionButtons');
-        for (let i = 1; i <= 5; i++) {
-            const button = document.createElement('button');
-            button.className = 'question-button';
-            button.textContent = 'Pregunta ' + i;
-            questionButtonsContainer.appendChild(button);
         }
     </script>
 </body>
