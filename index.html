@@ -80,21 +80,36 @@
         }
         .questions {
             display: none; /* Ocultamos las preguntas inicialmente */
+            flex-direction: column;
+            align-items: center;
         }
     </style>
+    <script>
+        function showQuestions() {
+            // Ocultar los botones principales
+            document.querySelector('.buttons').style.display = 'none';
+            // Mostrar los botones de preguntas
+            document.getElementById('questions').style.display = 'flex';
+        }
+
+        function showQuestion(number) {
+            alert(`Has seleccionado la ${number}`);
+        }
+
+        function goBack() {
+            // Mostrar los botones principales
+            document.querySelector('.buttons').style.display = 'flex';
+            // Ocultar los botones de preguntas
+            document.getElementById('questions').style.display = 'none';
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Asistente Personal Core 1</h1>
         <div class="buttons">
-            <div class="button" onclick="showQuestions('redes')">📱 Redes Sociales<br><small>Conéctate con amigos y familia</small></div>
-            <div class="button" onclick="showQuestions('familia')">👨‍👩‍👧 Familia<br><small>Fortalece los lazos familiares</small></div>
-            <div class="button" onclick="showQuestions('personalidad')">🧠 Personalidad<br><small>Descubre tu verdadero yo</small></div>
-            <div class="button" onclick="showQuestions('autoestima')">💪 Autoestima<br><small>Construye tu confianza</small></div>
-            <div class="button" onclick="showQuestions('amistades')">🤝 Amistades<br><small>Haz y mantén amistades</small></div>
-            <div class="button" onclick="showQuestions('identidad')">🆔 Identidad y Libertad<br><small>Explora quién eres</small></div>
-        </div>
-        <div class="questions" id="questions">
-            <h2>Selecciona una Pregunta:</h2>
-            <div class="question-buttons">
-                <div class="question-button" onclick="alert
+            <div class="button" onclick="showQuestions()">📱 Redes Sociales<br><small>Conéctate con amigos y familia</small></div>
+            <div class="button" onclick="showQuestions()">👨‍👩‍👧 Familia<br><small>Fortalece los lazos familiares</small></div>
+            <div class="button" onclick="showQuestions()">🧠 Personalidad<br><small>Descubre tu verdadero yo</small></div>
+            <div class="button" onclick="showQuestions()">💪 Autoestima<br><small>Construye tu confianza</small></div>
+            <div
