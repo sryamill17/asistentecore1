@@ -112,11 +112,6 @@
         .question-button:hover {
             background-color: #a6f7df;
         }
-        
-        .answer-section {
-            margin-top: 20px;
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -142,12 +137,12 @@
         <div id="questionsSection" class="questions-section">
             <button class="back-button" onclick="showMain()">← Volver</button>
             <h2 id="sectionTitle"></h2>
-            <div id="questionButtons"></div>
-            <div class="answer-section" id="answerSection">
-                <h3 id="currentQuestion"></h3>
-                <input type="text" id="userAnswer" placeholder="Escribe tu respuesta aquí" />
-                <button onclick="checkAnswer()">Verificar Respuesta</button>
-                <p id="resultMessage"></p>
+            <div id="questionButtons">
+                <button class="question-button">Pregunta 1</button>
+                <button class="question-button">Pregunta 2</button>
+                <button class="question-button">Pregunta 3</button>
+                <button class="question-button">Pregunta 4</button>
+                <button class="question-button">Pregunta 5</button>
             </div>
         </div>
     </div>
@@ -155,32 +150,32 @@
     <script>
         const questionsData = {
             'Redes Sociales': [
-                { question: '¿Cuál es el principal objetivo de las redes sociales?', answer: 'Conectar personas' },
-                { question: 'Menciona un riesgo de las redes sociales.', answer: 'Ciberacoso' },
-                { question: '¿Qué es un perfil privado?', answer: 'Un perfil que limita el acceso a información' },
-                { question: '¿Por qué es importante la privacidad en redes sociales?', answer: 'Para proteger información personal' },
-                { question: '¿Cómo se puede reportar contenido inapropiado?', answer: 'Usando la opción de reportar en la plataforma' }
+                { question: '¿Qué es una red social?', answer: 'Plataforma para conectar personas' },
+                { question: '¿Cuáles son ejemplos de redes sociales?', answer: 'Facebook, Twitter, Instagram' },
+                { question: '¿Qué precauciones se deben tomar en redes sociales?', answer: 'No compartir información personal' },
+                { question: '¿Cómo pueden afectar las redes sociales a la salud mental?', answer: 'Pueden causar ansiedad y comparación' },
+                { question: '¿Qué es el ciberacoso?', answer: 'Acoso a través de plataformas digitales' }
             ],
             'Familia': [
-                { question: '¿Qué significa la comunicación familiar?', answer: 'Interacción entre miembros de la familia' },
-                { question: 'Menciona una forma de fortalecer la relación familiar.', answer: 'Pasar tiempo juntos' },
-                { question: '¿Qué es el apoyo emocional?', answer: 'Brindar comprensión y aliento' },
-                { question: '¿Por qué son importantes las tradiciones familiares?', answer: 'Fomentan la unión y la identidad' },
-                { question: '¿Qué rol juega el respeto en la familia?', answer: 'Fundamental para la armonía' }
+                { question: '¿Qué es la familia?', answer: 'Grupo de personas unidas por lazos de parentesco' },
+                { question: '¿Cuáles son los tipos de familia?', answer: 'Nuclear, extensa, monoparental' },
+                { question: '¿Por qué es importante la familia?', answer: 'Proporciona apoyo emocional y social' },
+                { question: '¿Cómo se puede mejorar la comunicación familiar?', answer: 'Teniendo conversaciones abiertas' },
+                { question: '¿Qué rol juega la familia en el desarrollo de los niños?', answer: 'Influye en su educación y valores' }
             ],
             'Personalidad': [
-                { question: '¿Qué es la personalidad?', answer: 'Conjunto de características psicológicas' },
-                { question: 'Menciona un rasgo de personalidad.', answer: 'Extroversión' },
-                { question: '¿Cómo influye la personalidad en el comportamiento?', answer: 'Dirige las acciones y reacciones' },
-                { question: '¿Qué es la autoestima?', answer: 'Valoración que uno tiene de sí mismo' },
-                { question: '¿Cómo se puede mejorar la autoestima?', answer: 'A través de afirmaciones positivas' }
+                { question: '¿Qué es la personalidad?', answer: 'Conjunto de características y patrones de comportamiento' },
+                { question: '¿Cuáles son los tipos de personalidad?', answer: 'Introvertido, extrovertido, etc.' },
+                { question: '¿Cómo afecta la personalidad a las relaciones interpersonales?', answer: 'Influye en la manera de interactuar' },
+                { question: '¿Se puede cambiar la personalidad?', answer: 'Puede evolucionar con experiencias' },
+                { question: '¿Qué son los rasgos de personalidad?', answer: 'Características duraderas de una persona' }
             ],
             'Autoestima': [
-                { question: '¿Qué es la autoestima?', answer: 'Valoración personal' },
+                { question: '¿Qué es la autoestima?', answer: 'Valor que una persona se da a sí misma' },
                 { question: '¿Por qué es importante la autoestima?', answer: 'Influye en el bienestar emocional' },
-                { question: '¿Cómo se puede fomentar la autoestima?', answer: 'Reconociendo logros' },
-                { question: '¿Qué papel juega la autoaceptación?', answer: 'Es esencial para la autoestima saludable' },
-                { question: '¿Cómo afecta la crítica a la autoestima?', answer: 'Puede disminuirla' }
+                { question: '¿Cómo se puede mejorar la autoestima?', answer: 'Reconociendo logros y cualidades' },
+                { question: '¿Qué factores afectan la autoestima?', answer: 'Experiencias, relaciones, y autopercepción' },
+                { question: '¿Cuál es la relación entre autoestima y éxito?', answer: 'Una buena autoestima puede llevar a más logros' }
             ],
             'Amistades': [
                 { question: '¿Qué hace una buena amistad?', answer: 'Confianza y apoyo mutuo' },
@@ -208,31 +203,14 @@
                 const button = document.createElement('button');
                 button.className = 'question-button';
                 button.textContent = `Pregunta ${index + 1}`;
-                button.onclick = () => showAnswer(q.question, q.answer);
+                button.onclick = () => openQuestion(q.question, q.answer);
                 questionButtons.appendChild(button);
             });
         }
 
-        function showAnswer(question, answer) {
-            document.getElementById('currentQuestion').textContent = question;
-            document.getElementById('answerSection').style.display = 'block';
-            document.getElementById('userAnswer').value = '';
-            document.getElementById('resultMessage').textContent = '';
-            // Guardar la respuesta correcta para la verificación
-            document.getElementById('userAnswer').dataset.correctAnswer = answer;
-        }
-
-        function checkAnswer() {
-            const userAnswer = document.getElementById('userAnswer').value.trim();
-            const correctAnswer = document.getElementById('userAnswer').dataset.correctAnswer;
-            const resultMessage = document.getElementById('resultMessage');
-            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                resultMessage.textContent = '¡Correcto!';
-                resultMessage.style.color = 'green';
-            } else {
-                resultMessage.textContent = `Incorrecto. La respuesta correcta es: ${correctAnswer}`;
-                resultMessage.style.color = 'red';
-            }
+        function openQuestion(question, answer) {
+            const url = `question.html?question=${encodeURIComponent(question)}&answer=${encodeURIComponent(answer)}`;
+            window.open(url, '_blank'); // Abre en una nueva pestaña
         }
 
         function showMain() {
