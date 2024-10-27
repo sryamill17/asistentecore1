@@ -134,27 +134,50 @@
             </div>
         </div>
 
-        <!-- Sección de Preguntas -->
-        <div id="questionsSection" class="questions-section">
+        <style>
+        /* Estilos para ocultar las preguntas */
+        .question-content {
+            display: none;
+            margin-top: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .question-container {
+            margin-bottom: 10px;
+        }
+    </style>
+         <!-- Sección de Preguntas -->
+    <div id="questionsSection" class="questions-section">
         <button class="back-button" onclick="showMain()">← Volver</button>
         <h2 id="sectionTitle">Preguntas</h2>
-        <div id="questionButtons">
+        
+        <!-- Contenedores de cada Pregunta -->
+        <div class="question-container">
             <button class="question-button" onclick="toggleQuestion(1)">Pregunta 1</button>
-            <button class="question-button" onclick="toggleQuestion(2)">Pregunta 2</button>
-            <button class="question-button" onclick="toggleQuestion(3)">Pregunta 3</button>
-            <button class="question-button" onclick="toggleQuestion(4)">Pregunta 4</button>
-            <button class="question-button" onclick="toggleQuestion(5)">Pregunta 5</button>
+            <div id="question1" class="question-content">Contenido de la Pregunta 1</div>
         </div>
-        <!-- Contenidos de las Preguntas -->
-        <div id="question1" class="question-content">Contenido de la Pregunta 1</div>
-        <div id="question2" class="question-content">Contenido de la Pregunta 2</div>
-        <div id="question3" class="question-content">Contenido de la Pregunta 3</div>
-        <div id="question4" class="question-content">Contenido de la Pregunta 4</div>
-        <div id="question5" class="question-content">Contenido de la Pregunta 5</div>
+        <div class="question-container">
+            <button class="question-button" onclick="toggleQuestion(2)">Pregunta 2</button>
+            <div id="question2" class="question-content">Contenido de la Pregunta 2</div>
+        </div>
+        <div class="question-container">
+            <button class="question-button" onclick="toggleQuestion(3)">Pregunta 3</button>
+            <div id="question3" class="question-content">Contenido de la Pregunta 3</div>
+        </div>
+        <div class="question-container">
+            <button class="question-button" onclick="toggleQuestion(4)">Pregunta 4</button>
+            <div id="question4" class="question-content">Contenido de la Pregunta 4</div>
+        </div>
+        <div class="question-container">
+            <button class="question-button" onclick="toggleQuestion(5)">Pregunta 5</button>
+            <div id="question5" class="question-content">Contenido de la Pregunta 5</div>
+        </div>
     </div>
 
     <script>
-        // Función para mostrar u ocultar la pregunta seleccionada
+        // Función para mostrar u ocultar el contenido de la pregunta seleccionada
         function toggleQuestion(questionNumber) {
             const questionContent = document.getElementById(`question${questionNumber}`);
             
