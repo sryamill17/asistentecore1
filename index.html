@@ -134,17 +134,11 @@
             </div>
         </div>
 
-        <!-- Sección de Preguntas -->
+       <!-- Sección de Preguntas -->
         <div id="questionsSection" class="questions-section">
             <button class="back-button" onclick="showMain()">← Volver</button>
             <h2 id="sectionTitle"></h2>
             <div id="questionButtons"></div>
-            <div class="answer-section" id="answerSection">
-                <p id="questionText"></p>
-                <input type="text" id="responseInput" class="response-input" placeholder="Escribe tu respuesta aquí...">
-                <button class="check-button" onclick="checkAnswer()">Verificar Respuesta</button>
-                <p id="correctAnswer" class="correct-answer" style="display:none;"></p>
-            </div>
         </div>
     </div>
 
@@ -195,52 +189,44 @@
             ]
         };
 
-        let currentQuestions = [];
-        let currentIndex = 0;
-
         function showQuestions(section) {
             document.getElementById('mainSection').style.display = 'none';
             document.getElementById('questionsSection').style.display = 'block';
             document.getElementById('sectionTitle').textContent = section;
 
-            currentQuestions = sections[section];
-            currentIndex = 0;
-            displayQuestion(currentIndex);
+            const questionButtonsContainer = document.getElementById('questionButtons');
+            questionButtonsContainer.innerHTML = ''; // Limpiar contenido previo
+
+            sections[section].forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `
+                    <div class="question-button button" onclick="toggleQuestion(${index}, this)">${q.question}</div>
+                    <div class="answer-section" id="answer-${index}" style="display:none;">
+                        <input type="text" class="response-input" placeholder="Tu respuesta">
+                        <button class="check-button" onclick="checkAnswer(${index}, '${q.answer}', this)">Verificar</button>
+                        <div class="correct-answer" id="correctAnswer-${index}" style="display:none;"></div>
+                    </div>
+                `;
+                questionButtonsContainer.appendChild(questionDiv);
+            });
         }
 
-        function displayQuestion(index) {
-            const questionText = document.getElementById('questionText');
-            const responseInput = document.getElementById('responseInput');
-            const correctAnswer = document.getElementById('correctAnswer');
-            const answerSection = document.getElementById('answerSection');
-
-            questionText.textContent = currentQuestions[index].question;
-            responseInput.value = '';
-            correctAnswer.style.display = 'none';
-            answerSection.style.display = 'block';
+        function toggleQuestion(index, button) {
+            const answerSection = document.getElementById(`answer-${index}`);
+            answerSection.style.display = answerSection.style.display === 'block' ? 'none' : 'block';
         }
 
-        function checkAnswer() {
-            const responseInput = document.getElementById('responseInput');
-            const correctAnswer = document.getElementById('correctAnswer');
-            const currentQuestion = currentQuestions[currentIndex];
-
-            if (responseInput.value.trim().toLowerCase() === currentQuestion.answer.toLowerCase()) {
-                correctAnswer.textContent = "¡Correcto!";
+        function checkAnswer(index, correctAnswer, button) {
+            const responseInput = button.previousElementSibling;
+            const resultDisplay = document.getElementById(`correctAnswer-${index}`);
+            
+            if (responseInput.value.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+                resultDisplay.textContent = "¡Correcto!";
             } else {
-                correctAnswer.textContent = "Incorrecto. La respuesta correcta es: " + currentQuestion.answer;
+                resultDisplay.textContent = "Incorrecto. La respuesta correcta es: " + correctAnswer;
             }
-            correctAnswer.style.display = 'block';
+            resultDisplay.style.display = 'block';
         }
-
-        // Se maneja el clic en las preguntas para avanzar
-        document.getElementById('questionButtons').addEventListener('click', function(event) {
-            if (event.target.classList.contains('question-button')) {
-                const index = Array.from(document.getElementsByClassName('question-button')).indexOf(event.target);
-                currentIndex = index;
-                displayQuestion(currentIndex);
-            }
-        });
 
         function showMain() {
             document.getElementById('mainSection').style.display = 'block';
@@ -259,15 +245,6 @@
                     button.style.display = 'none';
                 }
             }
-        }
-
-        // Inicializa los botones de preguntas
-        const questionButtonsContainer = document.getElementById('questionButtons');
-        for (let i = 1; i <= 5; i++) {
-            const button = document.createElement('button');
-            button.className = 'question-button';
-            button.textContent = 'Pregunta ' + i;
-            questionButtonsContainer.appendChild(button);
         }
     </script>
 </body>
