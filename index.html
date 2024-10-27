@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #eaeaea;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
         }
@@ -16,14 +16,15 @@
             max-width: 600px;
             margin: auto;
             background: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
-            color: #333;
-            margin-bottom: 20px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
         }
         .buttons {
             display: flex;
@@ -32,28 +33,22 @@
             margin: 20px 0;
         }
         .button {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #ecf0f1;
+            color: #34495e;
             padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
             cursor: pointer;
             flex: 1 1 calc(48% - 10px);
             margin: 5px;
             text-align: center;
             transition: background-color 0.3s, transform 0.2s;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         .button:hover {
-            background-color: #e0e0e0;
+            background-color: #dcdde1;
             transform: translateY(-2px);
-        }
-        .description {
-            font-size: 14px;
-            color: #666;
-            text-align: center;
-            margin-top: 5px;
         }
         .search-bar {
             display: flex;
@@ -62,9 +57,13 @@
         .search-bar input[type="text"] {
             flex: 1;
             padding: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #bdc3c7;
             border-radius: 5px 0 0 5px;
             font-size: 16px;
+            outline: none;
+        }
+        .search-bar input[type="text"]:focus {
+            border-color: #007bff;
         }
         .search-bar button {
             padding: 15px;
@@ -79,48 +78,23 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
-        .icon {
-            display: block;
-            margin: 0 auto 5px;
-            font-size: 24px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>ASISTENTE PERSONAL CORE 1</h1>
+        <h1>Asistente Personal Core 1</h1>
         <div class="buttons">
-            <div class="button">
-                <span class="icon">&#128172;</span>
-                Redes Sociales
-                <div class="description">Conéctate y comparte con tus amigos.</div>
-            </div>
-            <div class="button">
-                <span class="icon">&#128101;</span>
-                Familia
-                <div class="description">Fortalece los lazos familiares.</div>
-            </div>
-            <div class="button">
-                <span class="icon">&#128100;</span>
-                Personalidad
-                <div class="description">Descubre más sobre ti mismo.</div>
-            </div>
-            <div class="button">
-                <span class="icon">&#128578;</span>
-                Autoestima
-                <div class="description">Mejora tu confianza personal.</div>
-            </div>
-            <div class="button">
-                <span class="icon">&#128101;</span>
-                Amistades
-                <div class="description">Cultiva relaciones significativas.</div>
-            </div>
-            <div class="button">
-                <span class="icon">&#128526;</span>
-                Identidad Y Libertad
-                <div class="description">Explora quién eres y tus derechos.</div>
-            </div>
+            <div class="button">Redes Sociales</div>
+            <div class="button">Familia</div>
+            <div class="button">Personalidad</div>
+            <div class="button">Autoestima</div>
+            <div class="button">Amistades</div>
+            <div class="button">Identidad y Libertad</div> <!-- Nuevo botón añadido -->
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Seleccione un tema">
             <button><span>&#128269;</span></button>
+        </div>
+    </div>
+</body>
+</html>
