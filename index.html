@@ -63,7 +63,7 @@
             border-radius: 5px 0 0 5px;
             font-size: 16px;
             outline: none;
-            font-family: 'Lato', sans-serif; /* Usar la misma fuente en el input */
+            font-family: 'Lato', sans-serif;
         }
         .search-bar input[type="text"]:focus {
             border-color: #007bff;
@@ -81,23 +81,98 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
+        
+        /* Estilos para la sección de preguntas */
+        .questions-section {
+            display: none;
+        }
+        
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .question-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+        }
+        
+        .question-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Asistente Personal Core 1</h1>
-        <div class="buttons">
-            <div class="button">📱 Redes Sociales<br><small>Conéctate con responsabilidad</small></div>
-            <div class="button">👨‍👩‍👧 Familia<br><small>Fortalece los lazos familiares</small></div>
-            <div class="button">🧠 Personalidad<br><small>Descubre tu verdadero yo</small></div>
-            <div class="button">💪 Autoestima<br><small>Construye tu confianza</small></div>
-            <div class="button">🤝 Amistades<br><small>Haz y mantén amistades</small></div>
-            <div class="button">🆔 Identidad y Libertad<br><small>Explora quién eres</small></div>
+        <!-- Sección Principal -->
+        <div id="mainSection">
+            <h1>Asistente Personal Core 1</h1>
+            <div class="buttons" id="buttonContainer">
+                <div class="button" onclick="showQuestions('Redes Sociales')">📱 Redes Sociales<br><small>Conéctate con responsabilidad</small></div>
+                <div class="button" onclick="showQuestions('Familia')">👨‍👩‍👧 Familia<br><small>Fortalece los lazos familiares</small></div>
+                <div class="button" onclick="showQuestions('Personalidad')">🧠 Personalidad<br><small>Descubre tu verdadero yo</small></div>
+                <div class="button" onclick="showQuestions('Autoestima')">💪 Autoestima<br><small>Construye tu confianza</small></div>
+                <div class="button" onclick="showQuestions('Amistades')">🤝 Amistades<br><small>Haz y mantén amistades</small></div>
+                <div class="button" onclick="showQuestions('Identidad')">🆔 Identidad y Libertad<br><small>Explora quién eres</small></div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Seleccione un tema" onkeyup="search()">
+                <button onclick="search()"><span>&#128269;</span></button>
+            </div>
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Seleccione un tema">
-            <button><span>&#128269;</span></button>
+
+        <!-- Sección de Preguntas -->
+        <div id="questionsSection" class="questions-section">
+            <button class="back-button" onclick="showMain()">← Volver</button>
+            <h2 id="sectionTitle"></h2>
+            <div id="questionButtons">
+                <button class="question-button">Pregunta 1</button>
+                <button class="question-button">Pregunta 2</button>
+                <button class="question-button">Pregunta 3</button>
+                <button class="question-button">Pregunta 4</button>
+                <button class="question-button">Pregunta 5</button>
+            </div>
         </div>
     </div>
+
+    <script>
+        function showQuestions(section) {
+            document.getElementById('mainSection').style.display = 'none';
+            document.getElementById('questionsSection').style.display = 'block';
+            document.getElementById('sectionTitle').textContent = section;
+        }
+
+        function showMain() {
+            document.getElementById('mainSection').style.display = 'block';
+            document.getElementById('questionsSection').style.display = 'none';
+        }
+
+        function search() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const buttons = document.getElementsByClassName('button');
+            
+            for (let button of buttons) {
+                const buttonText = button.textContent.toLowerCase();
+                if (buttonText.includes(searchText)) {
+                    button.style.display = 'block';
+                } else {
+                    button.style.display = 'none';
+                }
+            }
+        }
+    </script>
 </body>
 </html>
