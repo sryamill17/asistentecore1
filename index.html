@@ -116,7 +116,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+     <div class="container">
         <!-- Sección Principal -->
         <div id="mainSection">
             <h1>Asistente Personal Core 1</h1>
@@ -134,25 +134,64 @@
             </div>
         </div>
 
-        <!-- Sección de Preguntas -->
+       <!-- Sección de Preguntas -->
         <div id="questionsSection" class="questions-section">
             <button class="back-button" onclick="showMain()">← Volver</button>
             <h2 id="sectionTitle"></h2>
             <div id="questionButtons">
-                <button class="question-button">Pregunta 1</button>
-                <button class="question-button">Pregunta 2</button>
-                <button class="question-button">Pregunta 3</button>
-                <button class="question-button">Pregunta 4</button>
-                <button class="question-button">Pregunta 5</button>
+                <!-- Botones de preguntas que se generarán dinámicamente -->
+            </div>
+            <div id="answerSection">
+                <!-- Aquí se mostrará la respuesta de la pregunta seleccionada -->
             </div>
         </div>
     </div>
 
     <script>
+        // Preguntas y respuestas para cada sección
+        const sections = {
+            "Redes Sociales": [
+                { question: "¿Por qué es importante la privacidad?", answer: "La privacidad es importante para proteger tu información personal." },
+                { question: "¿Cómo evitar el ciberacoso?", answer: "Reporta y bloquea cuentas ofensivas, y ajusta tus configuraciones de privacidad." },
+                { question: "¿Qué hacer si te hackean?", answer: "Cambia tu contraseña de inmediato y revisa configuraciones de seguridad." },
+                { question: "¿Cuánto tiempo es saludable pasar en redes sociales?", answer: "No más de 2 horas al día para un equilibrio saludable." },
+                { question: "¿Cómo identificar noticias falsas?", answer: "Verifica la fuente y busca información en medios confiables." }
+            ],
+            "Familia": [
+                { question: "¿Cómo mejorar la comunicación familiar?", answer: "Escucha activamente y expresa tus pensamientos con respeto." },
+                { question: "¿Qué hacer en momentos de conflicto?", answer: "Mantén la calma, respeta el espacio de los demás y conversa luego." },
+                { question: "¿Cómo organizar actividades familiares?", answer: "Planifica con anticipación y considera los intereses de todos." },
+                { question: "¿Por qué es importante pasar tiempo en familia?", answer: "Fortalece los lazos afectivos y mejora la comprensión mutua." },
+                { question: "¿Cómo apoyar a un miembro de la familia?", answer: "Escúchalo, ofrécele ayuda y dale espacio si lo necesita." }
+            ]
+            // Agrega más secciones aquí con sus preguntas y respuestas
+        };
+
         function showQuestions(section) {
             document.getElementById('mainSection').style.display = 'none';
             document.getElementById('questionsSection').style.display = 'block';
             document.getElementById('sectionTitle').textContent = section;
+
+            // Limpiar botones de preguntas anteriores
+            const questionButtons = document.getElementById('questionButtons');
+            questionButtons.innerHTML = '';
+
+            // Crear botones de preguntas para la sección actual
+            sections[section].forEach((item, index) => {
+                const button = document.createElement('button');
+                button.className = 'question-button';
+                button.textContent = item.question;
+                button.onclick = () => showAnswer(section, index);
+                questionButtons.appendChild(button);
+            });
+
+            // Limpiar la sección de respuesta
+            document.getElementById('answerSection').innerHTML = '';
+        }
+
+        function showAnswer(section, questionIndex) {
+            const answerSection = document.getElementById('answerSection');
+            answerSection.innerHTML = `<p><strong>Respuesta:</strong> ${sections[section][questionIndex].answer}</p>`;
         }
 
         function showMain() {
