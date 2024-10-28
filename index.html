@@ -197,11 +197,11 @@
                 { question: '¿Cómo afecta la crítica a la autoestima?', answer: 'Puede disminuirla' }
             ],
             'Amistades': [
-                { question: '¿Qué hace una buena amistad?', answer: 'Confianza y apoyo mutuo' },
-                { question: 'Menciona una cualidad importante en un amigo.', answer: 'Lealtad' },
+                { question: '¿Qué cualidades debe tener un buen amigo?', answer: 'Lealtad y sinceridad' },
                 { question: '¿Cómo mantener una amistad?', answer: 'Manteniendo comunicación regular' },
                 { question: '¿Por qué es importante la empatía en las amistades?', answer: 'Fomenta la comprensión' },
-                { question: '¿Qué significa ser un buen amigo?', answer: 'Estar disponible y ser comprensivo' }
+                { question: '¿Qué significa ser un buen amigo?', answer: 'Estar disponible y ser comprensivo' },
+                { question: '¿Cómo resolver conflictos entre amigos?', answer: 'Con diálogo y respeto' }
             ],
             'Identidad': [
                 { question: '¿Qué es la identidad personal?', answer: 'Percepción que uno tiene de sí mismo' },
@@ -221,7 +221,7 @@
             questionsData[section].forEach((item, index) => {
                 const button = document.createElement("button");
                 button.classList.add("question-button");
-                button.innerText = item.question;
+                button.innerText = `Pregunta ${index + 1}`; // Cambiado para mostrar "Pregunta 1", "Pregunta 2", etc.
                 button.onclick = () => {
                     document.getElementById("answerSection").style.display = "flex";
                     document.getElementById("currentQuestion").innerText = item.question;
