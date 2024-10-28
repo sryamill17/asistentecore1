@@ -113,36 +113,9 @@
             background-color: #a6f7df;
         }
         
-         .answer-section {
+        .answer-section {
             margin-top: 20px;
             display: none;
-        }
-        
-        /* Modificar el cuadro de texto */
-        #userAnswer {
-            width: 100%;
-            height: 100px; /* Aumenta el tamaño vertical */
-            padding: 10px;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            font-size: 16px;
-            resize: none; /* Evita redimensionar el cuadro de texto */
-        }
-        
-        .answer-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .answer-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -234,7 +207,7 @@
             questionsData[section].forEach((q, index) => {
                 const button = document.createElement('button');
                 button.className = 'question-button';
-                button.textContent = Pregunta ${index + 1};
+                button.textContent = `Pregunta ${index + 1}`;
                 button.onclick = () => showAnswer(q.question, q.answer);
                 questionButtons.appendChild(button);
             });
@@ -257,7 +230,7 @@
                 resultMessage.textContent = '¡Correcto!';
                 resultMessage.style.color = 'green';
             } else {
-                resultMessage.textContent = Incorrecto. La respuesta correcta es: ${correctAnswer};
+                resultMessage.textContent = `Incorrecto. La respuesta correcta es: ${correctAnswer}`;
                 resultMessage.style.color = 'red';
             }
         }
