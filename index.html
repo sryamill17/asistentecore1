@@ -116,6 +116,20 @@
         .answer-section {
             margin-top: 20px;
             display: none;
+            flex-direction: column; /* Organiza el botón y el cuadro de texto en columna */
+        }
+
+        .answer-section input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px; /* Espacio entre el botón y el cuadro de texto */
+        }
+
+        .answer-section button {
+            margin-top: 10px; /* Espacio entre el cuadro de texto y el botón */
         }
     </style>
 </head>
@@ -184,74 +198,68 @@
             ],
             'Amistades': [
                 { question: '¿Qué hace una buena amistad?', answer: 'Confianza y apoyo mutuo' },
-                { question: '¿Por qué es importante la amistad?', answer: 'Brinda apoyo emocional' },
-                { question: '¿Cómo se puede fortalecer una amistad?', answer: 'Comunicándose abiertamente' },
-                { question: 'Menciona un signo de una mala amistad.', answer: 'Deshonestidad' },
-                { question: '¿Qué es la lealtad en la amistad?', answer: 'Apoyo constante' }
+                { question: 'Menciona una cualidad importante en un amigo.', answer: 'Lealtad' },
+                { question: '¿Cómo mantener una amistad?', answer: 'Manteniendo comunicación regular' },
+                { question: '¿Por qué es importante la empatía en las amistades?', answer: 'Fomenta la comprensión' },
+                { question: '¿Qué significa ser un buen amigo?', answer: 'Estar disponible y ser comprensivo' }
             ],
             'Identidad': [
-                { question: '¿Qué es la identidad personal?', answer: 'Conjunto de características que nos definen' },
-                { question: '¿Por qué es importante conocer nuestra identidad?', answer: 'Para comprendernos mejor a nosotros mismos' },
-                { question: '¿Qué factores influyen en la identidad?', answer: 'Cultura, experiencias, y relaciones' },
-                { question: '¿Cómo se relaciona la identidad con la autoestima?', answer: 'Una identidad clara puede mejorar la autoestima' },
-                { question: '¿Qué es la identidad social?', answer: 'Parte de nuestra identidad relacionada con grupos sociales' }
+                { question: '¿Qué es la identidad personal?', answer: 'Percepción que uno tiene de sí mismo' },
+                { question: '¿Por qué es importante la libertad en la identidad?', answer: 'Permite ser auténtico' },
+                { question: '¿Qué es la autoexpresión?', answer: 'Mostrar quién eres' },
+                { question: '¿Cómo se forma la identidad?', answer: 'A través de experiencias y valores' },
+                { question: '¿Qué papel juega la sociedad en la identidad?', answer: 'Influye en la percepción propia' }
             ]
         };
 
         function showQuestions(section) {
-            document.getElementById('mainSection').style.display = 'none';
-            document.getElementById('questionsSection').style.display = 'block';
-            document.getElementById('sectionTitle').textContent = section;
-            const questionButtons = document.getElementById('questionButtons');
-            questionButtons.innerHTML = ''; // Limpiar preguntas anteriores
-            questionsData[section].forEach((q, index) => {
-                const button = document.createElement('button');
-                button.className = 'question-button';
-                button.textContent = `Pregunta ${index + 1}`;
-                button.onclick = () => showAnswer(q.question, q.answer);
+            document.getElementById("mainSection").style.display = "none";
+            document.getElementById("questionsSection").style.display = "block";
+            document.getElementById("sectionTitle").innerText = section;
+            const questionButtons = document.getElementById("questionButtons");
+            questionButtons.innerHTML = '';
+            questionsData[section].forEach((item, index) => {
+                const button = document.createElement("button");
+                button.classList.add("question-button");
+                button.innerText = item.question;
+                button.onclick = () => {
+                    document.getElementById("answerSection").style.display = "flex";
+                    document.getElementById("currentQuestion").innerText = item.question;
+                    document.getElementById("userAnswer").value = '';
+                    document.getElementById("resultMessage").innerText = '';
+                    currentAnswer = item.answer;
+                };
                 questionButtons.appendChild(button);
             });
         }
 
-        function showAnswer(question, answer) {
-            document.getElementById('currentQuestion').textContent = question;
-            document.getElementById('answerSection').style.display = 'block';
-            document.getElementById('userAnswer').value = '';
-            document.getElementById('resultMessage').textContent = '';
-            // Guardar la respuesta correcta para la verificación
-            document.getElementById('userAnswer').dataset.correctAnswer = answer;
+        function showMain() {
+            document.getElementById("mainSection").style.display = "block";
+            document.getElementById("questionsSection").style.display = "none";
+            document.getElementById("answerSection").style.display = "none";
         }
+
+        let currentAnswer = '';
 
         function checkAnswer() {
-            const userAnswer = document.getElementById('userAnswer').value.trim();
-            const correctAnswer = document.getElementById('userAnswer').dataset.correctAnswer;
-            const resultMessage = document.getElementById('resultMessage');
-            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                resultMessage.textContent = '¡Correcto!';
-                resultMessage.style.color = 'green';
+            const userAnswer = document.getElementById("userAnswer").value.trim().toLowerCase();
+            const resultMessage = document.getElementById("resultMessage");
+            if (userAnswer === currentAnswer.toLowerCase()) {
+                resultMessage.innerText = "¡Correcto!";
+                resultMessage.style.color = "green";
             } else {
-                resultMessage.textContent = `Incorrecto. La respuesta correcta es: ${correctAnswer}`;
-                resultMessage.style.color = 'red';
+                resultMessage.innerText = "Incorrecto. Inténtalo de nuevo.";
+                resultMessage.style.color = "red";
             }
-        }
-
-        function showMain() {
-            document.getElementById('mainSection').style.display = 'block';
-            document.getElementById('questionsSection').style.display = 'none';
         }
 
         function search() {
-            const searchText = document.getElementById('searchInput').value.toLowerCase();
-            const buttons = document.getElementsByClassName('button');
-            
-            for (let button of buttons) {
-                const buttonText = button.textContent.toLowerCase();
-                if (buttonText.includes(searchText)) {
-                    button.style.display = 'block';
-                } else {
-                    button.style.display = 'none';
-                }
-            }
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const buttons = document.querySelectorAll(".button");
+            buttons.forEach(button => {
+                const buttonText = button.innerText.toLowerCase();
+                button.style.display = buttonText.includes(searchInput) ? "block" : "none";
+            });
         }
     </script>
 </body>
