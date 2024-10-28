@@ -14,8 +14,17 @@
         h1 {
             text-align: center;
         }
-        #mainSection, #questionsSection, #answerSection {
-            display: none;
+        #mainSection {
+            display: block; /* Cambiado a block para que aparezca al inicio */
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 8px;
+            max-width: 600px;
+        }
+        #questionsSection, #answerSection {
+            display: none; /* Asegurarse de que estas secciones estén ocultas al inicio */
             margin: 20px auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -160,110 +169,101 @@
                 },
                 {
                     question: "¿Qué tipos de autoestima existen?",
-                    answer: "- Pseudo: Alto nivel de competencia, pero bajo nivel de merecimiento\n- Baja: Bajos niveles de merecimiento y competencia\n- Narcisista: Alto nivel de merecimiento y bajo nivel de competencia\n- Alta: Alto nivel de merecimiento y competencia"
+                    answer: "- Pseudo: Alto nivel de competencia, pero bajo nivel de merecimiento\n- Baja: Bajos niveles de merecimiento y competencia\n- Narcisista: Alto nivel de merecimiento y bajo nivel de competencia."
                 },
                 {
-                    question: "¿Qué son las virtudes humanas?",
-                    answer: "Son hábitos operativos buenos, que permiten el desarrollo armónico de la persona y contribuyen a su madurez natural."
+                    question: "¿Qué relación existe entre la autoestima y la felicidad?",
+                    answer: "La autoestima y la felicidad se relacionan, ya que el nivel de felicidad es consecuencia de un autoestima saludable. Una persona con autoestima baja puede tener una percepción negativa de sus emociones y no estar dispuesta a disfrutar de la vida."
                 }
             ],
             "Amistades": [
                 {
-                    question: "¿Qué es la amistad?",
-                    answer: "Un tipo de amor que implica darse desea el bien y hacer el bien para el amigo y compartir la intimidad. Se forja con virtudes y se mantiene gracias a ellas."
+                    question: "¿Por qué son importantes las amistades en la vida?",
+                    answer: "Las amistades son esenciales para el bienestar emocional, ya que proporcionan apoyo, compañía y un sentido de pertenencia, lo que ayuda a prevenir la soledad y la depresión."
                 },
                 {
-                    question: "¿Cuáles son los niveles de donación de una persona?",
-                    answer: "Dar de lo que hago, dar de lo que tengo y dar de lo que soy."
+                    question: "¿Qué características definen una buena amistad?",
+                    answer: "La confianza, la lealtad, el respeto mutuo y la capacidad de comunicarse abierta y honestamente son características esenciales de una buena amistad."
                 },
                 {
-                    question: "¿Qué se necesita para profundizar en una amistad?",
-                    answer: "Cultivar la propia interioridad para poder aportar y hacer crecer la amistad. Entre más uno forme la personalidad propia e interioridad, va a haber mucho más para dar y profundizar en la amistad."
+                    question: "¿Cómo afectan las amistades a la autoestima?",
+                    answer: "Las amistades positivas pueden elevar la autoestima, mientras que las amistades tóxicas pueden minarla. Es importante rodearse de personas que nos valoren y apoyen."
                 },
                 {
-                    question: "¿Cuáles son los 7 pilares de la amistad?",
-                    answer: "1. El respeto: Aceptar al amigo tal y como es, respetar la libertad del otro, y la forma de tratarse.\n2. La lealtad: No caben fingimientos, simulaciones, posturas postizas ni suspicacias. Se construye sobre la sinceridad y la confianza. La verdad y la corrección son aspectos importantes de la lealtad.\n3. La generosidad: La amistad es un amor que implica darse, por eso uno busca dar más que recibir en una amistad.\n4. La disposición a perdonar: La disposición a olvidar los errores del otro, vencer el orgullo. Teniendo en cuenta que todos somos imperfectos y vamos a cometer errores y cometerán errores en contra nuestra.\n5. La apertura: Compartir no es quitar sino añadir, no es exclusivista ni se limita a una sola persona.\n6. La imaginación: Es necesaria para cualquier relación humana y para comprender a las personas, ponerse en su lugar.\n7. La capacidad de compromiso: Damos paso en nuestra vida a alguien con quien podemos contar."
+                    question: "¿Qué papel juegan las experiencias compartidas en la amistad?",
+                    answer: "Las experiencias compartidas fortalecen la conexión emocional entre amigos, creando recuerdos y vivencias que cimentan la relación."
                 },
                 {
-                    question: "¿Cuáles son las polillas de la amistad?",
-                    answer: "1. La crítica: Hablar mal de un amigo por motivos varios.\n2. El egoísmo: Buscar el interés propio y desinterés en el otro. Utilizar a las personas para lo que quiero conseguir.\n3. El resentimiento: Llevar cuenta de los errores y agravios que me han hecho.\n4. Susceptibilidad: Tener desconfianza de la otra persona."
+                    question: "¿Qué se debe hacer cuando una amistad se vuelve tóxica?",
+                    answer: "Es fundamental evaluar la relación y establecer límites claros. A veces, es necesario distanciarse de una amistad que ya no es saludable."
                 }
             ],
             "Identidad": [
                 {
-                    question: "¿Qué es la libertad?",
-                    answer: "La libertad es la capacidad que tiene el humano de decidir, pero bajo la responsabilidad, ya que, gozar de libertad no es precisamente cometer actos de un mundo vano. Que por esa falsa percepción de libertad te conviertes en presione de vicios. Por ellos la libertad va ligada en la medida que eres responsable."
+                    question: "¿Cómo influye la cultura en la formación de la identidad?",
+                    answer: "La cultura proporciona los valores, normas y creencias que moldean nuestra percepción de nosotros mismos y nuestra relación con el mundo."
                 },
                 {
-                    question: "¿Que construye tu intimidad?",
-                    answer: "La intimidad está constituida por todas aquellas cosas de tu profundo ser, aquellas cosas con las cuales tienes pudor de mostrar ante el mundo y solamente la reservas para ti. También, en casos esporádicos con personas cercanas a ti."
+                    question: "¿Qué papel juegan las experiencias personales en la identidad?",
+                    answer: "Las experiencias personales, incluyendo la educación, el entorno familiar y social, ayudan a definir quiénes somos y cómo nos vemos a nosotros mismos."
                 },
                 {
-                    question: "¿Qué puede llegar a formar el libre arbitrio?",
-                    answer: "Cuando posees un libre arbitrio, dejas que tus hábitos se formen, así como tus costumbres. Gracias a esto se logra alcanzar a desarrollar la capacidad humana, ya que, somos seres metódicos que se forman por la disciplina de sus hábitos."
+                    question: "¿Cómo afecta la identidad a nuestras decisiones?",
+                    answer: "Nuestra identidad influye en nuestras elecciones y comportamientos, ya que tendemos a actuar de manera coherente con nuestra autoimagen y valores."
                 },
                 {
-                    question: "¿La autenticidad puede ser un ideal moral?",
-                    answer: "En cierto modo, puede ser tomado de este modo desde un punto de vista en el que la persona se cuida, y se mejora constantemente en relación con su origen y destino. Siendo transparentes con estos."
+                    question: "¿Qué es la identidad social y cómo se forma?",
+                    answer: "La identidad social se refiere a la parte de nuestra identidad que está relacionada con los grupos a los que pertenecemos. Se forma a través de la interacción y la identificación con otros."
                 },
                 {
-                    question: "El seguir tu vocación, ¿Produce que se unifique tu vida?",
-                    answer: "Realmente si, ya que, al buscar seguir una vocación en específico, esto va a generar que inconscientemente tomes aptitudes consiguientes a estas tales como; tu forma de vestir, hablar, el tipo de personas con la que te juntas, etc. Ello produce que tu vida en general, poco a poco a tu propósito. En últimas, hasta reflejas en tu familia ello. Lo importante es que te sientas autorrealizado como persona."
+                    question: "¿Por qué es importante la búsqueda de identidad en la adolescencia?",
+                    answer: "Durante la adolescencia, la búsqueda de identidad es fundamental para el desarrollo personal y social, ya que ayuda a los jóvenes a establecer su lugar en el mundo y a definir sus valores y creencias."
                 }
             ]
         };
 
         function showQuestions(section) {
-            document.getElementById('mainSection').style.display = 'none';
-            document.getElementById('questionsSection').style.display = 'block';
-            document.getElementById('sectionTitle').innerText = section;
-            const questionButtons = document.getElementById('questionButtons');
-            questionButtons.innerHTML = ''; // Clear previous buttons
+            document.getElementById("mainSection").style.display = "none";
+            document.getElementById("questionsSection").style.display = "block";
+            document.getElementById("sectionTitle").innerText = section;
+            const questionButtons = document.getElementById("questionButtons");
+            questionButtons.innerHTML = ""; // Limpiar preguntas previas
+
             questionsData[section].forEach((item, index) => {
-                const button = document.createElement('button');
-                button.innerText = `Pregunta ${index + 1}`;
-                button.classList.add('question-button');
-                button.onclick = () => showAnswer(item.answer);
+                const button = document.createElement("button");
+                button.classList.add("question-button");
+                button.innerText = item.question;
+                button.onclick = function () { showAnswer(item.answer); };
                 questionButtons.appendChild(button);
             });
         }
 
         function showAnswer(answer) {
-            document.getElementById('correctAnswer').innerText = answer;
-            document.getElementById('resultMessage').innerText = '';
-            document.getElementById('answerSection').style.display = 'block';
-        }
-
-        function showMain() {
-            document.getElementById('mainSection').style.display = 'block';
-            document.getElementById('questionsSection').style.display = 'none';
-            document.getElementById('answerSection').style.display = 'none';
+            document.getElementById("questionsSection").style.display = "none";
+            document.getElementById("answerSection").style.display = "block";
+            document.getElementById("correctAnswer").innerText = answer;
+            document.getElementById("resultMessage").innerText = "";
         }
 
         function submitAnswer() {
-            const userResponse = document.getElementById('userResponse').value.trim();
-            const correctAnswer = document.getElementById('correctAnswer').innerText;
-            const resultMessage = document.getElementById('resultMessage');
+            const userResponse = document.getElementById("userResponse").value;
+            const correctAnswer = document.getElementById("correctAnswer").innerText;
+            const resultMessage = document.getElementById("resultMessage");
 
-            if (userResponse === '') {
-                resultMessage.innerText = 'Por favor, escribe una respuesta antes de verificar.';
-            } else if (userResponse === correctAnswer) {
-                resultMessage.innerText = '¡Correcto! Buen trabajo.';
+            if (userResponse.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+                resultMessage.innerText = "¡Correcto!";
             } else {
-                resultMessage.innerText = 'Incorrecto. Intenta de nuevo.';
+                resultMessage.innerText = "Incorrecto. La respuesta correcta es: " + correctAnswer;
             }
         }
 
-        function search() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const buttons = document.querySelectorAll('.button');
-            buttons.forEach(button => {
-                if (button.innerText.toLowerCase().includes(input)) {
-                    button.style.display = 'flex';
-                } else {
-                    button.style.display = 'none';
-                }
-            });
+        function showMain() {
+            document.getElementById("questionsSection").style.display = "none";
+            document.getElementById("answerSection").style.display = "none";
+            document.getElementById("mainSection").style.display = "block";
+            document.getElementById("userResponse").value = ""; // Limpiar respuesta del usuario
+            document.getElementById("correctAnswer").innerText = ""; // Limpiar respuesta correcta
+            document.getElementById("resultMessage").innerText = ""; // Limpiar mensaje de resultado
         }
     </script>
 </body>
