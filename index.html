@@ -119,17 +119,28 @@
             flex-direction: column; /* Organiza el botón y el cuadro de texto en columna */
         }
 
-        .answer-section input[type="text"] {
+        .answer-section textarea {
             width: 100%;
             padding: 15px;
             border: 1px solid #bdc3c7;
             border-radius: 5px;
             font-size: 16px;
             margin-top: 10px; /* Espacio entre el botón y el cuadro de texto */
+            height: 80px; /* Altura del cuadro de texto */
+            resize: none; /* Evita el cambio de tamaño del textarea */
         }
 
         .answer-section button {
             margin-top: 10px; /* Espacio entre el cuadro de texto y el botón */
+        }
+
+        .correct-answer {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .resultMessage {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -159,9 +170,10 @@
             <div id="questionButtons"></div>
             <div class="answer-section" id="answerSection">
                 <h3 id="currentQuestion"></h3>
-                <input type="text" id="userAnswer" placeholder="Escribe tu respuesta aquí" />
+                <textarea id="userAnswer" placeholder="Escribe tu respuesta aquí"></textarea>
                 <button onclick="checkAnswer()">Verificar Respuesta</button>
-                <p id="resultMessage"></p>
+                <p class="resultMessage" id="resultMessage"></p>
+                <p class="correct-answer" id="correctAnswerMessage"></p>
             </div>
         </div>
     </div>
@@ -192,9 +204,9 @@
             'Autoestima': [
                 { question: '¿Qué es la autoestima?', answer: 'Valoración personal' },
                 { question: '¿Por qué es importante la autoestima?', answer: 'Influye en el bienestar emocional' },
-                { question: '¿Cómo se puede fomentar la autoestima?', answer: 'Reconociendo logros' },
-                { question: '¿Qué papel juega la autoaceptación?', answer: 'Es esencial para la autoestima saludable' },
-                { question: '¿Cómo afecta la crítica a la autoestima?', answer: 'Puede disminuirla' }
+                { question: '¿Cómo se puede fomentar la autoestima?', answer: 'Reconociendo logros personales' },
+                { question: 'Menciona una actividad que ayude a mejorar la autoestima.', answer: 'Escribir un diario' },
+                { question: '¿Qué papel juegan las opiniones ajenas en la autoestima?', answer: 'Pueden afectar la percepción propia' }
             ],
             'Amistades': [
                 { question: '¿Qué cualidades debe tener un buen amigo?', answer: 'Lealtad y sinceridad' },
@@ -227,6 +239,7 @@
                     document.getElementById("currentQuestion").innerText = item.question;
                     document.getElementById("userAnswer").value = '';
                     document.getElementById("resultMessage").innerText = '';
+                    document.getElementById("correctAnswerMessage").innerText = ''; // Limpiar mensaje de respuesta correcta
                     currentAnswer = item.answer;
                 };
                 questionButtons.appendChild(button);
@@ -244,6 +257,8 @@
         function checkAnswer() {
             const userAnswer = document.getElementById("userAnswer").value.trim().toLowerCase();
             const resultMessage = document.getElementById("resultMessage");
+            const correctAnswerMessage = document.getElementById("correctAnswerMessage");
+
             if (userAnswer === currentAnswer.toLowerCase()) {
                 resultMessage.innerText = "¡Correcto!";
                 resultMessage.style.color = "green";
@@ -251,6 +266,10 @@
                 resultMessage.innerText = "Incorrecto. Inténtalo de nuevo.";
                 resultMessage.style.color = "red";
             }
+
+            // Mostrar la respuesta correcta
+            correctAnswerMessage.innerText = `Respuesta correcta: ${currentAnswer}`;
+            correctAnswerMessage.style.color = "blue"; // Opcional: cambia el color del mensaje de respuesta correcta
         }
 
         function search() {
