@@ -3,222 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas y Respuestas</title>
+    <title>Asistente Personal Core 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Lato', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
         }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+        }
         h1 {
             text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 700;
         }
-        #mainSection {
-            display: block; /* Cambiado a block para que aparezca al inicio */
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: white;
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .button {
+            background-color: #ecf0f1;
+            color: #34495e;
+            padding: 15px;
+            border: 1px solid #bdc3c7;
             border-radius: 8px;
-            max-width: 600px;
+            cursor: pointer;
+            flex: 1 1 calc(48% - 10px);
+            margin: 5px;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
-        #questionsSection, #answerSection {
-            display: none; /* Asegurarse de que estas secciones estén ocultas al inicio */
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: white;
-            border-radius: 8px;
-            max-width: 600px;
+        .button:hover {
+            background-color: #dcdde1;
+            transform: translateY(-2px);
         }
-        .button, .question-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+        .search-bar {
+            display: flex;
+            margin-top: 20px;
+        }
+        .search-bar input[type="text"] {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+            outline: none;
+            font-family: 'Lato', sans-serif;
+        }
+        .search-bar input[type="text"]:focus {
+            border-color: #007bff;
+        }
+        .search-bar button {
+            padding: 15px;
             border: none;
-            border-radius: 5px;
             background-color: #007bff;
             color: white;
+            border-radius: 0 5px 5px 0;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .questions-section {
+            display: none;
+        }
+        
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .question-button {
+            background-color: #a6f7df;
+            color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
             font-size: 16px;
         }
-        .button:hover, .question-button:hover {
-            background-color: #0056b3;
+        
+        .question-button:hover {
+            background-color: #a6f7df;
         }
-        #answerSection {
-            display: flex;
-            flex-direction: column;
+        
+        .answer-section {
+            margin-top: 20px;
+            display: none;
+            flex-direction: column; /* Organiza el botón y el cuadro de texto en columna */
         }
-        #correctAnswer {
-            margin: 10px 0;
+
+        .answer-section textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px; /* Espacio entre el botón y el cuadro de texto */
+            height: 80px; /* Altura del cuadro de texto */
+            resize: none; /* Evita el cambio de tamaño del textarea */
+        }
+
+        .answer-section button {
+            margin-top: 10px; /* Espacio entre el cuadro de texto y el botón */
+        }
+
+        .correct-answer {
             font-weight: bold;
-        }
-        #resultMessage {
             margin-top: 10px;
-            color: red;
+        }
+
+        .resultMessage {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Preguntas y Respuestas</h1>
+    <div class="container">
+        <!-- Sección Principal -->
+        <div id="mainSection">
+            <h1>Asistente Personal Core 1</h1>
+            <div class="buttons" id="buttonContainer">
+                <div class="button" onclick="showQuestions('Redes Sociales')">📱 Redes Sociales<br><small>Conéctate con responsabilidad</small></div>
+                <div class="button" onclick="showQuestions('Familia')">👨‍👩‍👧 Familia<br><small>Fortalece los lazos familiares</small></div>
+                <div class="button" onclick="showQuestions('Personalidad')">🧠 Personalidad<br><small>Descubre tu verdadero yo</small></div>
+                <div class="button" onclick="showQuestions('Autoestima')">💪 Autoestima<br><small>Construye tu confianza</small></div>
+                <div class="button" onclick="showQuestions('Amistades')">🤝 Amistades<br><small>Haz y mantén amistades</small></div>
+                <div class="button" onclick="showQuestions('Identidad')">🆔 Identidad y Libertad<br><small>Explora quién eres</small></div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Seleccione un tema" onkeyup="search()">
+                <button onclick="search()"><span>&#128269;</span></button>
+            </div>
+        </div>
 
-    <div id="mainSection">
-        <button class="button" onclick="showQuestions('Redes Sociales')">Redes Sociales</button>
-        <button class="button" onclick="showQuestions('Familia')">Familia</button>
-        <button class="button" onclick="showQuestions('Personalidad')">Personalidad</button>
-        <button class="button" onclick="showQuestions('Autoestima')">Autoestima</button>
-        <button class="button" onclick="showQuestions('Amistades')">Amistades</button>
-        <button class="button" onclick="showQuestions('Identidad')">Identidad</button>
-    </div>
-
-    <div id="questionsSection">
-        <h2 id="sectionTitle"></h2>
-        <div id="questionButtons"></div>
-        <button class="button" onclick="showMain()">Volver</button>
-    </div>
-
-    <div id="answerSection">
-        <div id="correctAnswer"></div>
-        <textarea id="userResponse" placeholder="Escribe tu respuesta aquí..." rows="4"></textarea>
-        <button class="button" onclick="submitAnswer()">Verificar Respuesta</button>
-        <div id="resultMessage"></div>
+        <!-- Sección de Preguntas -->
+        <div id="questionsSection" class="questions-section">
+            <button class="back-button" onclick="showMain()">← Volver</button>
+            <h2 id="sectionTitle"></h2>
+            <div id="questionButtons"></div>
+            <div class="answer-section" id="answerSection">
+                <h3 id="currentQuestion"></h3>
+                <textarea id="userAnswer" placeholder="Escribe tu respuesta aquí"></textarea>
+                <button onclick="checkAnswer()">Verificar Respuesta</button>
+                <p class="resultMessage" id="resultMessage"></p>
+                <p class="correct-answer" id="correctAnswerMessage"></p>
+            </div>
+        </div>
     </div>
 
     <script>
         const questionsData = {
-            "Redes Sociales": [
-                {
-                    question: "¿Por qué es importante revisar la configuración de privacidad en redes sociales y cómo afecta esto a la seguridad del usuario?",
-                    answer: "La configuración de privacidad permite al usuario controlar quién ve su información, reduciendo el riesgo de que personas con malas intenciones accedan a datos sensibles y minimizando la posibilidad de acoso, extorsión o robo de identidad."
-                },
-                {
-                    question: "¿Cuáles son las posibles consecuencias de publicar información falsa o dañina en redes sociales?",
-                    answer: "Publicar información falsa o dañina puede perjudicar la reputación del emisor y causar conflictos personales, dañar la imagen de terceros y, a largo plazo, generar una huella digital negativa que afecte futuras relaciones personales y profesionales."
-                },
-                {
-                    question: "¿Qué riesgos existen al agregar personas desconocidas a nuestras redes sociales y cómo prevenirlos?",
-                    answer: "Agregar desconocidos permite a extraños acceder a nuestra información personal, lo cual podría llevar a situaciones de riesgo como el robo de datos o el acoso. Prevenir estos riesgos implica seleccionar cuidadosamente a los contactos y no compartir información sensible."
-                },
-                {
-                    question: "¿Cómo influye el uso excesivo de redes sociales en la vida de los jóvenes y cuál es la recomendación para un uso saludable?",
-                    answer: "El uso excesivo de redes sociales puede llevar a problemas como la adicción, baja productividad y deterioro de la salud mental. Para un uso saludable, se recomienda limitar el tiempo en redes a no más de 30 minutos diarios y destinar momentos sin conexión para otras actividades."
-                },
-                {
-                    question: "¿Cuáles son algunos de los riesgos que enfrentan niñas, niños y adolescentes en el entorno digital?",
-                    answer: "Los riesgos incluyen exposición a contenido inadecuado, ciberacoso, grooming, desinformación, adicción a las pantallas, intercambio de fotos inapropiadas, y estafas. Estos peligros pueden afectar su bienestar emocional, su seguridad y su autoestima."
-                }
+            'Redes Sociales': [
+                { question: '¿Cuál es el principal objetivo de las redes sociales?', answer: 'Conectar personas' },
+                { question: 'Menciona un riesgo de las redes sociales.', answer: 'Ciberacoso' },
+                { question: '¿Qué es un perfil privado?', answer: 'Un perfil que limita el acceso a información' },
+                { question: '¿Por qué es importante la privacidad en redes sociales?', answer: 'Para proteger información personal' },
+                { question: '¿Cómo se puede reportar contenido inapropiado?', answer: 'Usando la opción de reportar en la plataforma' }
             ],
-            "Familia": [
-                {
-                    question: "¿Por qué la familia es importante en la creación de la estructura personal de cada uno?",
-                    answer: "Puesto que, se crea la base de la personalidad orientándose en la actitud de sus padres y un poco en la de sus hermanos. Para que un ser humano evolucione es fundamental la ayuda, adecuación y constancia proporcionada por sus padres, la cual influirá a futuro en la personalidad del ser humano."
-                },
-                {
-                    question: "¿Cuál es el rol de la madre en una familia?",
-                    answer: "La madre es el principio de seguridad. Es la muestra del amor incondicional, la protección física y afectiva, sin importar lo que hagamos, nuestra madre siempre será nuestro refugio de afecto."
-                },
-                {
-                    question: "¿Cuál es el rol del padre en una familia?",
-                    answer: "El padre es el principio de la realidad. La importancia del padre es el enseñar que el mundo tiene sus leyes y sus límites."
-                },
-                {
-                    question: "¿Son importantes la presencia materna y paterna?",
-                    answer: "Los roles maternos y paternos no son excluyentes, ni exclusivos. Es decir, aunque sea fundamental contar con estos roles en nuestras vidas, tanto el padre, como la madre puede llevar a cabo las funciones del otro."
-                },
-                {
-                    question: "¿Los humanos tenemos nuestra familia por instinto?",
-                    answer: "Nosotros a diferencia de los animales, no nos alimentamos, ni dormimos, ni habitamos de manera instintiva, por tal razón, el papel de los padres es fundamental para que se inicie el proceso de socialización primaria, es decir, proporcionar a la persona mínimos vitales para que pueda integrarse a la sociedad. Por ejemplo, comer, desplazarse, educación, entre otros."
-                }
+            'Familia': [
+                { question: '¿Qué significa la comunicación familiar?', answer: 'Interacción entre miembros de la familia' },
+                { question: 'Menciona una forma de fortalecer la relación familiar.', answer: 'Pasar tiempo juntos' },
+                { question: '¿Qué es el apoyo emocional?', answer: 'Brindar comprensión y aliento' },
+                { question: '¿Por qué son importantes las tradiciones familiares?', answer: 'Fomentan la unión y la identidad' },
+                { question: '¿Qué rol juega el respeto en la familia?', answer: 'Fundamental para la armonía' }
             ],
-            "Personalidad": [
-                {
-                    question: "¿Qué factores influyen en la formación de la personalidad?",
-                    answer: "La herencia, el ambiente y la experiencia de la propia trayectoria."
-                },
-                {
-                    question: "¿Cuál es la clave para alcanzar el equilibrio personal?",
-                    answer: "Encontrar un modelo de identidad propio."
-                },
-                {
-                    question: "¿Qué tres elementos básicos forman parte de la personalidad según el texto?",
-                    answer: "El carácter, el temperamento y el rasgo."
-                },
-                {
-                    question: "¿Qué papel tiene el temperamento en la personalidad?",
-                    answer: "Es la parte heredada, relacionada con patrones de conducta hereditaria."
-                },
-                {
-                    question: "¿Cómo se define la 'personalidad sana'?",
-                    answer: "Aquella que ha logrado un equilibrio entre sus componentes, permitiendo un grado de madurez."
-                }
+            'Personalidad': [
+                { question: '¿Qué es la personalidad?', answer: 'Conjunto de características psicológicas' },
+                { question: 'Menciona un rasgo de personalidad.', answer: 'Extroversión' },
+                { question: '¿Cómo influye la personalidad en el comportamiento?', answer: 'Dirige las acciones y reacciones' },
+                { question: '¿Qué es la autoestima?', answer: 'Valoración que uno tiene de sí mismo' },
+                { question: '¿Cómo se puede mejorar la autoestima?', answer: 'A través de afirmaciones positivas' }
             ],
-            "Autoestima": [
-                {
-                    question: "¿Cuáles son los componentes de la autoestima?",
-                    answer: "El autoestima esta compuesto la competencia, que es el componente conductual y observable de la autoestima y es medible por la efectividad y el merecimiento, que se relaciona con el valor que la persona se adjudica como ser humano."
-                },
-                {
-                    question: "¿Cómo se puede mejorar el autoestima?",
-                    answer: "El autoestima es un estatus vital de la persona, que es dinámica en el tiempo. Para tener una buena autoestima, es necesario tener una educación de la virtudes humanas y tener un trabajo de mejora continuo."
-                },
-                {
-                    question: "¿Por qué es importante una buena autoestima?",
-                    answer: "Esto permite potenciar a la persona, ayudándola a trascender sus propios límites para dar y recibir. Así, puede poner sus habilidades y talentos al servicio de los demás."
-                },
-                {
-                    question: "¿Qué tipos de autoestima existen?",
-                    answer: "- Pseudo: Alto nivel de competencia, pero bajo nivel de merecimiento\n- Baja: Bajos niveles de merecimiento y competencia\n- Narcisista: Alto nivel de merecimiento y bajo nivel de competencia."
-                },
-                {
-                    question: "¿Qué relación existe entre la autoestima y la felicidad?",
-                    answer: "La autoestima y la felicidad se relacionan, ya que el nivel de felicidad es consecuencia de un autoestima saludable. Una persona con autoestima baja puede tener una percepción negativa de sus emociones y no estar dispuesta a disfrutar de la vida."
-                }
+            'Autoestima': [
+                { question: '¿Qué es la autoestima?', answer: 'Valoración personal' },
+                { question: '¿Por qué es importante la autoestima?', answer: 'Influye en el bienestar emocional' },
+                { question: '¿Cómo se puede fomentar la autoestima?', answer: 'Reconociendo logros personales' },
+                { question: 'Menciona una actividad que ayude a mejorar la autoestima.', answer: 'Escribir un diario' },
+                { question: '¿Qué papel juegan las opiniones ajenas en la autoestima?', answer: 'Pueden afectar la percepción propia' }
             ],
-            "Amistades": [
-                {
-                    question: "¿Por qué son importantes las amistades en la vida?",
-                    answer: "Las amistades son esenciales para el bienestar emocional, ya que proporcionan apoyo, compañía y un sentido de pertenencia, lo que ayuda a prevenir la soledad y la depresión."
-                },
-                {
-                    question: "¿Qué características definen una buena amistad?",
-                    answer: "La confianza, la lealtad, el respeto mutuo y la capacidad de comunicarse abierta y honestamente son características esenciales de una buena amistad."
-                },
-                {
-                    question: "¿Cómo afectan las amistades a la autoestima?",
-                    answer: "Las amistades positivas pueden elevar la autoestima, mientras que las amistades tóxicas pueden minarla. Es importante rodearse de personas que nos valoren y apoyen."
-                },
-                {
-                    question: "¿Qué papel juegan las experiencias compartidas en la amistad?",
-                    answer: "Las experiencias compartidas fortalecen la conexión emocional entre amigos, creando recuerdos y vivencias que cimentan la relación."
-                },
-                {
-                    question: "¿Qué se debe hacer cuando una amistad se vuelve tóxica?",
-                    answer: "Es fundamental evaluar la relación y establecer límites claros. A veces, es necesario distanciarse de una amistad que ya no es saludable."
-                }
+            'Amistades': [
+                { question: '¿Qué cualidades debe tener un buen amigo?', answer: 'Lealtad y sinceridad' },
+                { question: '¿Cómo mantener una amistad?', answer: 'Manteniendo comunicación regular' },
+                { question: '¿Por qué es importante la empatía en las amistades?', answer: 'Fomenta la comprensión' },
+                { question: '¿Qué significa ser un buen amigo?', answer: 'Estar disponible y ser comprensivo' },
+                { question: '¿Cómo resolver conflictos entre amigos?', answer: 'Con diálogo y respeto' }
             ],
-            "Identidad": [
-                {
-                    question: "¿Cómo influye la cultura en la formación de la identidad?",
-                    answer: "La cultura proporciona los valores, normas y creencias que moldean nuestra percepción de nosotros mismos y nuestra relación con el mundo."
-                },
-                {
-                    question: "¿Qué papel juegan las experiencias personales en la identidad?",
-                    answer: "Las experiencias personales, incluyendo la educación, el entorno familiar y social, ayudan a definir quiénes somos y cómo nos vemos a nosotros mismos."
-                },
-                {
-                    question: "¿Cómo afecta la identidad a nuestras decisiones?",
-                    answer: "Nuestra identidad influye en nuestras elecciones y comportamientos, ya que tendemos a actuar de manera coherente con nuestra autoimagen y valores."
-                },
-                {
-                    question: "¿Qué es la identidad social y cómo se forma?",
-                    answer: "La identidad social se refiere a la parte de nuestra identidad que está relacionada con los grupos a los que pertenecemos. Se forma a través de la interacción y la identificación con otros."
-                },
-                {
-                    question: "¿Por qué es importante la búsqueda de identidad en la adolescencia?",
-                    answer: "Durante la adolescencia, la búsqueda de identidad es fundamental para el desarrollo personal y social, ya que ayuda a los jóvenes a establecer su lugar en el mundo y a definir sus valores y creencias."
-                }
+            'Identidad': [
+                { question: '¿Qué es la identidad personal?', answer: 'Percepción que uno tiene de sí mismo' },
+                { question: '¿Por qué es importante la libertad en la identidad?', answer: 'Permite ser auténtico' },
+                { question: '¿Qué es la autoexpresión?', answer: 'Mostrar quién eres' },
+                { question: '¿Cómo se forma la identidad?', answer: 'A través de experiencias y valores' },
+                { question: '¿Qué papel juega la sociedad en la identidad?', answer: 'Influye en la percepción propia' }
             ]
         };
 
@@ -227,43 +229,56 @@
             document.getElementById("questionsSection").style.display = "block";
             document.getElementById("sectionTitle").innerText = section;
             const questionButtons = document.getElementById("questionButtons");
-            questionButtons.innerHTML = ""; // Limpiar preguntas previas
-
+            questionButtons.innerHTML = '';
             questionsData[section].forEach((item, index) => {
                 const button = document.createElement("button");
                 button.classList.add("question-button");
-                button.innerText = item.question;
-                button.onclick = function () { showAnswer(item.answer); };
+                button.innerText = `Pregunta ${index + 1}`; // Cambiado para mostrar "Pregunta 1", "Pregunta 2", etc.
+                button.onclick = () => {
+                    document.getElementById("answerSection").style.display = "flex";
+                    document.getElementById("currentQuestion").innerText = item.question;
+                    document.getElementById("userAnswer").value = '';
+                    document.getElementById("resultMessage").innerText = '';
+                    document.getElementById("correctAnswerMessage").innerText = ''; // Limpiar mensaje de respuesta correcta
+                    currentAnswer = item.answer;
+                };
                 questionButtons.appendChild(button);
             });
         }
 
-        function showAnswer(answer) {
-            document.getElementById("questionsSection").style.display = "none";
-            document.getElementById("answerSection").style.display = "block";
-            document.getElementById("correctAnswer").innerText = answer;
-            document.getElementById("resultMessage").innerText = "";
-        }
-
-        function submitAnswer() {
-            const userResponse = document.getElementById("userResponse").value;
-            const correctAnswer = document.getElementById("correctAnswer").innerText;
-            const resultMessage = document.getElementById("resultMessage");
-
-            if (userResponse.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
-                resultMessage.innerText = "¡Correcto!";
-            } else {
-                resultMessage.innerText = "Incorrecto. La respuesta correcta es: " + correctAnswer;
-            }
-        }
-
         function showMain() {
+            document.getElementById("mainSection").style.display = "block";
             document.getElementById("questionsSection").style.display = "none";
             document.getElementById("answerSection").style.display = "none";
-            document.getElementById("mainSection").style.display = "block";
-            document.getElementById("userResponse").value = ""; // Limpiar respuesta del usuario
-            document.getElementById("correctAnswer").innerText = ""; // Limpiar respuesta correcta
-            document.getElementById("resultMessage").innerText = ""; // Limpiar mensaje de resultado
+        }
+
+        let currentAnswer = '';
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById("userAnswer").value.trim().toLowerCase();
+            const resultMessage = document.getElementById("resultMessage");
+            const correctAnswerMessage = document.getElementById("correctAnswerMessage");
+
+            if (userAnswer === currentAnswer.toLowerCase()) {
+                resultMessage.innerText = "¡Correcto!";
+                resultMessage.style.color = "green";
+            } else {
+                resultMessage.innerText = "Incorrecto. Inténtalo de nuevo.";
+                resultMessage.style.color = "red";
+            }
+
+            // Mostrar la respuesta correcta
+            correctAnswerMessage.innerText = `Respuesta correcta: ${currentAnswer}`;
+            correctAnswerMessage.style.color = "blue"; // Opcional: cambia el color del mensaje de respuesta correcta
+        }
+
+        function search() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const buttons = document.querySelectorAll(".button");
+            buttons.forEach(button => {
+                const buttonText = button.innerText.toLowerCase();
+                button.style.display = buttonText.includes(searchInput) ? "block" : "none";
+            });
         }
     </script>
 </body>
